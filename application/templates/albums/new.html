@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('albums_create') }}">
+  <input type="text" name="nimi" placeholder="nimi"/>
+  <input type="number" name="julkaisuvuosi" placeholder="julkaisuvuosi"/>
+  <input type="number" name="tahtien_maara" min="1" max="5" value="1" placeholder="tähdet"/>
+  <input type="submit" value="Add a new task"/>
+</form>
+{% endblock %}

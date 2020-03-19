@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Albumin nimi</th>
+      <th>Julkaisuvuosi</th>
+      <th>Tähtien määrä</th>
+    </tr>
+    {% for album in albums %}
+    <tr>
+      <td>{{ album.nimi }}</td>
+      <td>{{ album.julkaisuvuosi }}</td>
+      <td>{{ album.tahtien_maara }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
