@@ -2,9 +2,44 @@
   
 {% block body %}
 <form method="POST" action="{{ url_for('albums_create') }}">
-  <input type="text" name="nimi" placeholder="nimi"/>
+<!-- 
+	<input type="text" name="nimi" placeholder="nimi"/>
   <input type="number" name="julkaisuvuosi" placeholder="julkaisuvuosi"/>
   <input type="number" name="tahtien_maara" min="1" max="5" value="1" placeholder="tähdet"/>
   <input type="submit" value="Add a new album"/>
+-->
+
+	<table>
+		<tr>
+			<td>
+				{{ form.nimi.label }}
+			</td>
+			<td>
+				{{ form.nimi }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.julkaisuvuosi.label }}
+			</td>
+			<td>
+				{{ form.julkaisuvuosi }}
+			</td>
+		<tr>
+			<td>
+				{{ form.tahtien_maara.label }}
+			</td>
+			<td>
+				{% for subfield in form.tahtien_maara %}
+					{{ subfield.label }} {{ subfield }}
+				{% endfor %}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" value="Add a new album" />
+			</td>
+		</tr>
+	</table>
 </form>
 {% endblock %}

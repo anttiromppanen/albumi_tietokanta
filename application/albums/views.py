@@ -1,6 +1,8 @@
-from application import app, db
 from flask import redirect, render_template, request, url_for
+
+from application import app, db
 from application.albums.models import Album
+from application.albums.forms import TaskForm
 
 @app.route("/albums", methods=["GET"])
 def albums_index():
@@ -8,7 +10,7 @@ def albums_index():
 
 @app.route("/albums/new/")
 def albums_form():
-    return render_template("albums/new.html")
+    return render_template("albums/new.html", form = TaskForm())
 
 @app.route("/albums/", methods=["POST"])
 def albums_create():
