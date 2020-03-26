@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Albumi tietokanta</title>
@@ -7,6 +7,7 @@
 
   <body>
     <ul>
+			<li><a href="{{ url_for('index') }}">Home</a></li>
       <li><a href="{{ url_for('albums_index') }}">List albums</a></li>
       <li><a href="{{ url_for('albums_form') }}">Add an album</a></li>
     </ul>
