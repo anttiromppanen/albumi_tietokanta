@@ -6,6 +6,8 @@ class Album(db.Model):
     julkaisuvuosi = db.Column(db.Integer, nullable=False)
     tahtien_maara = db.Column(db.Integer, nullable=False)
 
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+
     def __init__(self, nimi, julkaisuvuosi, tahtien_maara):
         self.nimi = nimi
         self.julkaisuvuosi = julkaisuvuosi

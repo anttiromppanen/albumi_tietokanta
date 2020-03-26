@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from application import app, db
 from application.albums.models import Album
@@ -27,6 +27,8 @@ def albums_create():
     #    return render_template("albums/new.html", form = form)
 
     albumi = Album(nimi, julkaisuvuosi, tahtien_maara)
+    albumi.account_id = current_user.id
+
     db.session().add(albumi)
     db.session().commit()
 
