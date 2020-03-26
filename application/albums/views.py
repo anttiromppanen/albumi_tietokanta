@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, url_for
 
 from application import app, db
 from application.albums.models import Album
-from application.albums.forms import TaskForm
+from application.albums.forms import AlbumForm
 
 @app.route("/albums", methods=["GET"])
 def albums_index():
@@ -10,12 +10,21 @@ def albums_index():
 
 @app.route("/albums/new/")
 def albums_form():
-    return render_template("albums/new.html", form = TaskForm())
+    return render_template("albums/new.html", form = AlbumForm())
 
 @app.route("/albums/", methods=["POST"])
 def albums_create():
-    a = Album(request.form.get("nimi"), request.form.get("julkaisuvuosi"), request.form.get("tahtien_maara"))
-    db.session().add(a)
+    form = AlbumForm(request.form)
+
+    nimi = form.nimi.data
+    julkaisuvuosi = form.julkaisuvuosi.data
+    tahtien_maara = int(form.tahtien_maara.data)
+
+    #if not form.validate():
+    #    return render_template("albums/new.html", form = form)
+
+    albumi = Album(nimi, julkaisuvuosi, tahtien_maara)
+    db.session().add(albumi)
     db.session().commit()
 
     return redirect(url_for("albums_index"))

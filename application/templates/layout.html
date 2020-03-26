@@ -6,6 +6,13 @@
   </head>
 
   <body>
+		{% if current_user.is_authenticated %}
+    <p>
+		Olet kirjautunut nimellä {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</>
+    </p>
+    {% else %}
+    <a href="{{ url_for('auth_login') }}">Kirjaudu</a>
+    {% endif %}
     <ul>
 			<li><a href="{{ url_for('index') }}">Home</a></li>
       <li><a href="{{ url_for('albums_index') }}">List albums</a></li>
