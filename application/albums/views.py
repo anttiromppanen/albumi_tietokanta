@@ -1,4 +1,5 @@
 from flask import redirect, render_template, request, url_for
+from flask_login import login_required
 
 from application import app, db
 from application.albums.models import Album
@@ -9,10 +10,12 @@ def albums_index():
     return render_template("albums/list.html", albums = Album.query.all())
 
 @app.route("/albums/new/")
+@login_required
 def albums_form():
     return render_template("albums/new.html", form = AlbumForm())
 
 @app.route("/albums/", methods=["POST"])
+@login_required
 def albums_create():
     form = AlbumForm(request.form)
 
