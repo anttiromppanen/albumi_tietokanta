@@ -19,12 +19,12 @@ def albums_form():
 def albums_create():
     form = AlbumForm(request.form)
 
+    if not form.validate_on_submit():
+        return render_template("albums/new.html", form = form)
+
     nimi = form.nimi.data
     julkaisuvuosi = form.julkaisuvuosi.data
     tahtien_maara = int(form.tahtien_maara.data)
-
-    #if not form.validate():
-    #    return render_template("albums/new.html", form = form)
 
     albumi = Album(nimi, julkaisuvuosi, tahtien_maara)
     albumi.account_id = current_user.id

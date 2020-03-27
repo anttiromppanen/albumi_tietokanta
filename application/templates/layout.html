@@ -14,9 +14,9 @@
     <a href="{{ url_for('auth_login') }}">Kirjaudu</a>
     {% endif %}
     <ul>
-			<li><a href="{{ url_for('index') }}">Home</a></li>
-      <li><a href="{{ url_for('albums_index') }}">List albums</a></li>
-      <li><a href="{{ url_for('albums_form') }}">Add an album</a></li>
+			<li><a href="{{ url_for('index') }}">Etusivu</a></li>
+      <li><a href="{{ url_for('albums_index') }}">Näytä  albumit</a></li>
+      <li><a href="{{ url_for('albums_form') }}">Lisää albumi</a></li>
     </ul>
     {% block body %}
       <p>

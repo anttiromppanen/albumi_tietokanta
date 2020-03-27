@@ -11,11 +11,14 @@ def auth_login():
         return render_template("auth/loginform.html", form = LoginForm())
 
     form = LoginForm(request.form)
+    
+    if not form.validate_on_submit():
+        return render_template("auth/loginform.html", form = form)
 
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
 
     if not user:
-        return render_template("auth/loginform.html", form = form, error = "No such username or password")
+        return render_template("auth/loginform.html", form = form, error = "Käyttäjänimi tai salasana väärin")
 
     login_user(user)
     return redirect(url_for("index"))
