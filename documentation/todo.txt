@@ -1,0 +1,5 @@
+templates/list 16:18
+	button, joka vie sivulle, jossa voi editoida kyseistä albumia (GET /albums/id)
+
+templates/list
+	button, jolla voi poistaa kyseisen albumin tietokannasta

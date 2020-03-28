@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+	<tr>
+		<th>Albumin nimi</th>
+		<th>Julkaisuvuosi</th>
+		<th>Tähtien määrä</th>
+	</tr>
+	<tr>
+		<td>{{ albumi.nimi }}</td>
+		<td>{{ albumi.julkaisuvuosi }}</td>
+		<td>{{ albumi.tahtien_maara }}</td>
+	</tr>
+</table>
+
+{% endblock %}

@@ -9,6 +9,13 @@ from application.albums.forms import AlbumForm
 def albums_index():
     return render_template("albums/list.html", albums = Album.query.all())
 
+@app.route("/albums/<album_id>/", methods=["GET"])
+def album_via_id(album_id):
+    print(album_id)
+    album = Album.query.get(album_id)
+
+    return render_template("albums/id.html", albumi = album)
+
 @app.route("/albums/new/")
 @login_required
 def albums_form():
