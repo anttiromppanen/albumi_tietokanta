@@ -1,5 +1,11 @@
-templates/list 16:18
-	button, joka vie sivulle, jossa voi editoida kyseistä albumia (GET /albums/id)
+albumin editointi
+	albumien listauksesta pääsee nyt edit linkistä kyseisen albumin sivulle
+		- albumin tiedot nyt <td>:ssä, td:n muuttaminen formiksi ja albumin
+			tiedot formin kenttiin
+		- kaikkien kenttien muokkaus vai pelkästään tähtien muokkaus?
+		- formin validointi
+		- käyttäjä saa nähdä vain omat albumit, ei muiden lisäämiä
+		- virheviesti, jos haetaan väärällä id:llä
 
 templates/list
 	button, jolla voi poistaa kyseisen albumin tietokannasta
