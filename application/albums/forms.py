@@ -8,3 +8,9 @@ class AlbumForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class AlbumEditForm(FlaskForm):
+    tahtien_maara = RadioField("Tähtien määrä", choices=[("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5")], default="1", validators=[validators.InputRequired()])
+
+    class Meta:
+        csrf = False

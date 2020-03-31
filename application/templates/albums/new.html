@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
   
 {% block body %}
+<h1>Lisää albumi</h1>
 <form method="POST" action="{{ url_for('albums_create') }}">
 	<table>
 		<tr>
@@ -44,7 +45,7 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="submit" value="Add a new album" />
+				<input type="submit" value="Lisää uusi albumi" />
 			</td>
 		</tr>
 	</table>

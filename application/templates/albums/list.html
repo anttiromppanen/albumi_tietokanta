@@ -12,9 +12,8 @@
       <td>{{ album.nimi }}</td>
       <td>{{ album.julkaisuvuosi }}</td>
       <td>{{ album.tahtien_maara }}</td>
-			<!-- No functionality yet, only a blank button -->
 			<td>
-				<a href="{{ url_for('album_via_id', album_id=album.id) }}">edit</a>
+				<a href="{{ url_for('album_via_id', album_id = album.id) }}">edit</a>
 			</td>
     </tr>
     {% endfor %}
