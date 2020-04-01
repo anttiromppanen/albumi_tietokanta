@@ -8,13 +8,17 @@ from application.albums.forms import AlbumForm, AlbumEditForm
 @app.route("/albums", methods=["GET"])
 @login_required
 def albums_index():
-    return render_template("albums/list.html", albums = Album.query.all())
+    albumitByUserID = Album.query.filter_by(account_id = current_user.id).all()
+    return render_template("albums/list.html", albums = albumitByUserID)
 
 @app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
 def album_via_id(album_id):
     album = Album.query.get(album_id)
-    print(album)
+
+    # tälle joku error-viesti
+    if not album.account_id == current_user.id:
+        return redirect(url_for("albums_index"))
 
     return render_template("albums/id.html", albumi = album, form = AlbumEditForm())
 
