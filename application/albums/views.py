@@ -56,3 +56,12 @@ def albums_create():
     db.session().commit()
 
     return redirect(url_for("albums_index"))
+
+@app.route("/delete_album/<album_id>")
+def album_delete(album_id):
+    album = Album.query.get(album_id)
+
+    db.session.delete(album)
+    db.session.commit()
+
+    return redirect(url_for("albums_index"))
