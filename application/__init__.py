@@ -22,6 +22,8 @@ from application.albums import views
 from application.auth import models
 from application.auth import views
 
+from application.esittajat_albumit import models
+
 #kirjautuminen
 from application.auth.models import User
 from os import urandom

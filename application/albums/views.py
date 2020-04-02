@@ -7,7 +7,10 @@ from application import app, db
 from application.albums.models import Album
 from application.albums.forms import AlbumForm, AlbumEditForm
 
+# poistoon kuhan lisäys toimii aputaulukolla
 from application.esittajat.models import Esittaja 
+
+from application.esittajat_albumit.models import EsittajatAlbumit
 
 @app.route("/albums", methods=["GET"])
 @login_required
@@ -54,20 +57,44 @@ def albums_create():
         return render_template("albums/new.html", form = form)
 
     esittajanNimi = form.artisti.data
-    nimi = form.nimi.data
+    albuminNimi = form.nimi.data
     julkaisuvuosi = form.julkaisuvuosi.data
     tahtien_maara = int(form.tahtien_maara.data)
 
-    albumi = Album(nimi, julkaisuvuosi, tahtien_maara)
+    albumi = Album(albuminNimi, julkaisuvuosi, tahtien_maara)
     albumi.account_id = current_user.id
 
-    esittaja = Esittaja.query.filter(func.lower(Esittaja.nimi) == func.lower(form.artisti.data)).first()
-    
-    if not esittaja:
-        lisattavaEsittaja = Esittaja(esittajanNimi)
-        db.session().add(lisattavaEsittaja)
+    onkoAlbumiJoLisatty = Album.query.filter(
+            Album.nimi.like(albuminNimi),
+            Album.account_id.like(current_user.id)
+            ).first()
 
-    db.session().add(albumi)
+    onkoEsittajaJoLisatty = Esittaja.query.filter(
+            Esittaja.nimi.like(esittajanNimi)
+            ).first()
+
+    if not onkoAlbumiJoLisatty:
+        db.session().add(albumi)
+        db.session().commit()
+
+    if not onkoEsittajaJoLisatty:
+        uusiEsittaja = Esittaja(esittajanNimi)
+        db.session().add(uusiEsittaja)
+        db.session().commit()
+        
+    albumiID = Album.query.filter_by(nimi = albuminNimi).first().id
+    esittajaID = Esittaja.query.filter_by(nimi = esittajanNimi).first().id
+
+    onkoJoLisatty = EsittajatAlbumit.query.filter(
+            EsittajatAlbumit.albumi_id.like(albumiID),
+            EsittajatAlbumit.esittaja_id.like(esittajaID),
+            EsittajatAlbumit.lisaaja_id.like(current_user.id)
+            ).first()
+
+    if not onkoJoLisatty:
+        uusiEsittajaAlbumi = EsittajatAlbumit(albumiID, esittajaID, current_user.id)
+
+    db.session().add(uusiEsittajaAlbumi)
     db.session().commit()
 
     return redirect(url_for("albums_index"))
