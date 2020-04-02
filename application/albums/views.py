@@ -1,9 +1,13 @@
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
+from sqlalchemy import func
+
 from application import app, db
 from application.albums.models import Album
 from application.albums.forms import AlbumForm, AlbumEditForm
+
+from application.esittajat.models import Esittaja 
 
 @app.route("/albums", methods=["GET"])
 @login_required
@@ -49,12 +53,19 @@ def albums_create():
     if not form.validate_on_submit():
         return render_template("albums/new.html", form = form)
 
+    esittajanNimi = form.artisti.data
     nimi = form.nimi.data
     julkaisuvuosi = form.julkaisuvuosi.data
     tahtien_maara = int(form.tahtien_maara.data)
 
     albumi = Album(nimi, julkaisuvuosi, tahtien_maara)
     albumi.account_id = current_user.id
+
+    esittaja = Esittaja.query.filter(func.lower(Esittaja.nimi) == func.lower(form.artisti.data)).first()
+    
+    if not esittaja:
+        lisattavaEsittaja = Esittaja(esittajanNimi)
+        db.session().add(lisattavaEsittaja)
 
     db.session().add(albumi)
     db.session().commit()
