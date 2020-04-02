@@ -64,37 +64,7 @@ def albums_create():
     albumi = Album(albuminNimi, julkaisuvuosi, tahtien_maara)
     albumi.account_id = current_user.id
 
-    onkoAlbumiJoLisatty = Album.query.filter(
-            Album.nimi.like(albuminNimi),
-            Album.account_id.like(current_user.id)
-            ).first()
-
-    onkoEsittajaJoLisatty = Esittaja.query.filter(
-            Esittaja.nimi.like(esittajanNimi)
-            ).first()
-
-    if not onkoAlbumiJoLisatty:
-        db.session().add(albumi)
-        db.session().commit()
-
-    if not onkoEsittajaJoLisatty:
-        uusiEsittaja = Esittaja(esittajanNimi)
-        db.session().add(uusiEsittaja)
-        db.session().commit()
-        
-    albumiID = Album.query.filter_by(nimi = albuminNimi).first().id
-    esittajaID = Esittaja.query.filter_by(nimi = esittajanNimi).first().id
-
-    onkoJoLisatty = EsittajatAlbumit.query.filter(
-            EsittajatAlbumit.albumi_id.like(albumiID),
-            EsittajatAlbumit.esittaja_id.like(esittajaID),
-            EsittajatAlbumit.lisaaja_id.like(current_user.id)
-            ).first()
-
-    if not onkoJoLisatty:
-        uusiEsittajaAlbumi = EsittajatAlbumit(albumiID, esittajaID, current_user.id)
-
-    db.session().add(uusiEsittajaAlbumi)
+    db.session().add(albumi)
     db.session().commit()
 
     return redirect(url_for("albums_index"))
