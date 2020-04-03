@@ -4,7 +4,7 @@
 
 <h1>Muokkaa albumia</h1>
 <form method="POST" action="{{ url_for('album_edit', album_id = albumi.id) }}">
-	<table>
+<table>
 		<tr>
 			<th>Albumin nimi: </th>
 			<td>{{ albumi.nimi }}</td>
@@ -30,6 +30,6 @@
 				<input type="submit" value="Muokkaa albumia">
 			</td>
 		</tr>
-	</table>
+</table>
 </form>
 {% endblock %}

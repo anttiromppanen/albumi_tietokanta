@@ -20,20 +20,23 @@ class EsittajatAlbumit(Base):
 
     @staticmethod
     def get_albums_by_user():
-        stmt = text("SELECT Esittaja.nimi esittaja, Album.nimi albumi,"
-                    " Album.julkaisuvuosi julkaisuvuosi, Album.tahtien_maara tahtien_maara"
+        stmt = text("SELECT Esittaja.nimi, Album.nimi,"
+                    " Album.julkaisuvuosi, Album.tahtien_maara, Album.id, Esittajat_albumit.id"
                     " FROM Esittajat_albumit, Esittaja, Album WHERE"
                     " Esittajat_albumit.albumi_id = Album.id AND"
                     " Esittajat_albumit.esittaja_id = Esittaja.id AND"
                     " lisaaja_id = :user").params(user=current_user.id)
+
         res = db.engine.execute(stmt)
 
         result = []
         for row in res:
             result.append({
-                "esittaja":row[0],
+                "esittaja": row[0],
                 "albumi":row[1],
                 "julkaisuvuosi":row[2],
-                "tahtien_maara":row[3]})
+                "tahtien_maara":row[3],
+                "album_id":row[4],
+                "esittajat_albumit_id":row[5]})
 
         return result

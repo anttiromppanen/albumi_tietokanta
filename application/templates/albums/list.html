@@ -15,8 +15,8 @@
       <td>{{ album.julkaisuvuosi }}</td>
       <td>{{ album.tahtien_maara }}</td>
 			<td>
-				<a href="{{ url_for('album_via_id', album_id = album.id) }}">muokkaa</a>
-				<form action="{{ url_for('album_delete', album_id = album.id) }}">
+				<a href="{{ url_for('album_via_id', album_id = album.album_id) }}">muokkaa</a>
+				<form action="{{ url_for('album_delete', album_id = album.esittajat_albumit_id) }}">
 					<input type="submit" value="poista">
 				</form>
 			</td>

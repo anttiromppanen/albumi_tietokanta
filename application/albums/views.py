@@ -95,7 +95,8 @@ def albums_create():
 
 @app.route("/delete_album/<album_id>")
 def album_delete(album_id):
-    album = Album.query.get(album_id)
+    album = EsittajatAlbumit.query.get(album_id)
+    print(album)
 
     db.session.delete(album)
     db.session.commit()
