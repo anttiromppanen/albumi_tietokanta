@@ -1,4 +1,5 @@
-albumin editointi
-	albumien listauksesta pääsee nyt edit linkistä kyseisen albumin sivulle
-		- käyttäjä saa nähdä vain omat albumit, ei muiden lisäämiä
-		- virheviesti, jos haetaan väärällä id:llä
+uuden käyttäjän rekisteröinti
+
+validointi
+
+monimutkainen tietokantakysely
