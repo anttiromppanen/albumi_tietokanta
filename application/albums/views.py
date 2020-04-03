@@ -15,8 +15,7 @@ from application.esittajat_albumit.models import EsittajatAlbumit
 @app.route("/albums", methods=["GET"])
 @login_required
 def albums_index():
-    albumitByUserID = Album.query.filter_by(account_id = current_user.id).all()
-    return render_template("albums/list.html", albums = albumitByUserID)
+    return render_template("albums/list.html", albums = EsittajatAlbumit.get_albums_by_user())
 
 @app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
@@ -64,7 +63,32 @@ def albums_create():
     albumi = Album(albuminNimi, julkaisuvuosi, tahtien_maara)
     albumi.account_id = current_user.id
 
-    db.session().add(albumi)
+    loytyykoEsittaja = Esittaja.query.filter_by(nimi = esittajanNimi).first()
+    loytyykoAlbumi = Album.query.filter_by(nimi = albuminNimi).first()
+
+    esittaja = Esittaja(esittajanNimi)
+
+    if not loytyykoEsittaja:
+        db.session().add(esittaja)
+        db.session().commit()
+
+    if not loytyykoAlbumi:
+        db.session().add(albumi)
+        db.session().commit()
+
+    loytyykoEsittaja = Esittaja.query.filter_by(nimi = esittajanNimi).first()
+    loytyykoAlbumi = Album.query.filter_by(nimi = albuminNimi).first()
+
+    loytyykoEsittajaJaAlbumi = EsittajatAlbumit.query.filter(
+            EsittajatAlbumit.albumi_id == loytyykoAlbumi.id,
+            EsittajatAlbumit.esittaja_id == loytyykoEsittaja.id,
+            EsittajatAlbumit.lisaaja_id == current_user.id
+            ).first()
+
+    if not loytyykoEsittajaJaAlbumi:
+        esittajaJaAlbumi = EsittajatAlbumit(loytyykoAlbumi.id, loytyykoEsittaja.id, current_user.id)
+        db.session().add(esittajaJaAlbumi)
+
     db.session().commit()
 
     return redirect(url_for("albums_index"))

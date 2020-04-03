@@ -1,6 +1,8 @@
 from application import db
 from application.models import Base
 
+from flask_login import current_user
+
 from sqlalchemy.sql import text
 
 class EsittajatAlbumit(Base):
@@ -17,12 +19,21 @@ class EsittajatAlbumit(Base):
         self.lisaaja_id = lisaaja_id
 
     @staticmethod
-    def tulosta_kayttajan_lisaamat():
-        stmt = text("SELECT id, albumi_id FROM EsittajatAlbumit")
+    def get_albums_by_user():
+        stmt = text("SELECT Esittaja.nimi esittaja, Album.nimi albumi,"
+                    " Album.julkaisuvuosi julkaisuvuosi, Album.tahtien_maara tahtien_maara"
+                    " FROM Esittajat_albumit, Esittaja, Album WHERE"
+                    " Esittajat_albumit.albumi_id = Album.id AND"
+                    " Esittajat_albumit.esittaja_id = Esittaja.id AND"
+                    " lisaaja_id = :user").params(user=current_user.id)
         res = db.engine.execute(stmt)
-        
-        response = []
-        for row in res:
-            response.append({"id":row[0], "name":row[1]})
 
-        return response
+        result = []
+        for row in res:
+            result.append({
+                "esittaja":row[0],
+                "albumi":row[1],
+                "julkaisuvuosi":row[2],
+                "tahtien_maara":row[3]})
+
+        return result
