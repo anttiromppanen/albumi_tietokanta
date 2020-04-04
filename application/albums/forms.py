@@ -1,10 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, RadioField, validators
 
+from datetime import datetime
+
 class AlbumForm(FlaskForm):
-    artisti = StringField("Artisti", validators=[validators.InputRequired()])
-    nimi = StringField("Albumin nimi", validators=[validators.InputRequired(), validators.Length(min=2)])
-    julkaisuvuosi = IntegerField("Julkaisuvuosi", validators=[validators.InputRequired()])
+    artisti = StringField("Artisti", validators=[validators.InputRequired(), validators.Length(min=1, max=100)])
+    nimi = StringField("Albumin nimi", validators=[validators.InputRequired(), validators.Length(min=2, max=100)])
+    julkaisuvuosi = IntegerField("Julkaisuvuosi", validators=[validators.InputRequired(), validators.NumberRange(min=1500, max=datetime.now().year)])
     tahtien_maara = RadioField("Tähtien määrä", choices=[("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5")], default="1", validators=[validators.InputRequired()])
 
     class Meta:

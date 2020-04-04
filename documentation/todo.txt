@@ -1,5 +1,5 @@
 uuden käyttäjän rekisteröinti
 
-validointi
-
 monimutkainen tietokantakysely
+
+bootstraparin hinkkausta

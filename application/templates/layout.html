@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Albumi tietokanta</title>
     <link
       rel="stylesheet"
@@ -42,12 +43,14 @@
         </ul>
         <div class="form-inline mt-2 mt-md-0">
           {% if current_user.is_authenticated %}
-          <a href="{{ url_for('auth_logout') }}"
-            >Terve {{ current_user.username }} -- Kirjaudu ulos</a
+					{{ current_user.username }}
+          <a class="btn btn-primary" href="{{ url_for('auth_logout') }}"
+            >Kirjaudu ulos</a
           >
           {% else %}
-          <a href="{{ url_for('auth_login') }}">Login</a>
+          <a class="btn btn-primary" href="{{ url_for('auth_login') }}">Kirjaudu</a>
           {% endif %}
+					<button class="btn btn-danger ml-2">Rekisteröidy</button>
         </div>
       </div>
     </nav>

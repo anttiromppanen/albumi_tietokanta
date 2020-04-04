@@ -8,7 +8,7 @@ from application.albums.models import Album
 from application.albums.forms import AlbumForm, AlbumEditForm
 
 # poistoon kuhan lisäys toimii aputaulukolla
-from application.esittajat.models import Esittaja 
+from application.esittajat.models import Esittaja
 
 from application.esittajat_albumit.models import EsittajatAlbumit
 
