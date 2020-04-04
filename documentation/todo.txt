@@ -1,7 +1,17 @@
+etusivu
+	jotain sisältöä
+
+login
+	formi uusiksi
+
+albumien lisäys
+	error viestit
+
+albumit
+	albumien listaus paremmaksi
+
 uuden käyttäjän rekisteröinti
 	käyttäjän, salasanan validointiin lisäystä
-
-albumit, lisää albumi näkyy vain jos kirjautunut
 
 monimutkainen tietokantakysely
 
