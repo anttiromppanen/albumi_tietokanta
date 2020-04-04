@@ -27,3 +27,7 @@ def auth_login():
 def auth_logout():
     logout_user()
     return redirect(url_for("index"))
+
+@app.route("/auth/register")
+def auth_register():
+    return render_template("auth/registerform.html")

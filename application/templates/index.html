@@ -3,6 +3,10 @@
 {% block body %}
 	{{ albums_by_user }}
 	<p>
-    Welcome
+		{% if current_user.is_authenticated %}
+			<h1>Tervetuloa {{ current_user.username }}</h1>		
+		{% else %}
+			<h1>Kirjaudu sisään</h1>
+		{% endif %}
   </p>
 {% endblock %}

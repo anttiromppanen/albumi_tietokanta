@@ -6,16 +6,15 @@
     <title>Albumi tietokanta</title>
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/minty/bootstrap.min.css"
       crossorigin="anonymous"
     />
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="{{ url_for('index') }}"
-        >Albumi tietokanta</a
+    <nav class="navbar navbar-expand-md navbar-primary bg-primary mb-4">
+      <a class="navbar-brand text-white font-weight-light" href="{{ url_for('index') }}">
+				<span class="btn btn-light font-weight-bold text-danger"><i class="fas fa-guitar fa-2x"></i>Albumi</span> tietokanta</a
       >
       <button
         class="navbar-toggler"
@@ -28,34 +27,33 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="collapse navbar-collapse pl-2" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('albums_index') }} "
-              >Albumit</a
+          <li class="nav-item mr-2">
+            <a class="nav-link text-light btn btn-primary text-weight-bold" href="{{ url_for('albums_index') }} "
+              ><i class="fas fa-list-ul fa-lg mr-1 text-dark"></i>Albumit</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('albums_form') }} "
-              >Lisää albumi</a
+            <a class="nav-link text-light btn btn-primary text-weight-bold" href="{{ url_for('albums_form') }} "
+              ><i class="fas fa-plus fa-lg mr-1 text-warning"></i>Lisää albumi</a
             >
           </li>
         </ul>
         <div class="form-inline mt-2 mt-md-0">
           {% if current_user.is_authenticated %}
-					{{ current_user.username }}
-          <a class="btn btn-primary" href="{{ url_for('auth_logout') }}"
+          <a class="btn btn-info" href="{{ url_for('auth_logout') }}"
             >Kirjaudu ulos</a
           >
           {% else %}
-          <a class="btn btn-primary" href="{{ url_for('auth_login') }}">Kirjaudu</a>
+          <a class="btn btn-light" href="{{ url_for('auth_login') }}">Kirjaudu</a>
           {% endif %}
-					<button class="btn btn-danger ml-2">Rekisteröidy</button>
+					<a class="btn btn-danger ml-2 text-light" href="{{ url_for('auth_register') }}">Rekisteröidy</a>
         </div>
       </div>
     </nav>
 		
-		<main role="main" class="container">
+		<main role="main" class="container d-flex align-items-center justify-content-center">
     {% block body %}
     <p>
       Content.
@@ -78,5 +76,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+		<script src="https://kit.fontawesome.com/7ae346fe6a.js" crossorigin="anonymous"></script>
   </body>
 </html>

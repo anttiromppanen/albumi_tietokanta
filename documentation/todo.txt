@@ -1,5 +1,7 @@
 uuden käyttäjän rekisteröinti
 
+albumit, lisää albumi näkyy vain jos kirjautunut
+
 monimutkainen tietokantakysely
 
 bootstraparin hinkkausta
