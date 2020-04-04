@@ -2,6 +2,34 @@
 
 {% block body %}
 
-<h1>Luo uusi käyttäjä</h1>
+<h1 class="text-primary">
+	<i class="fas fa-user-edit text-warning"></i> Luo uusi käyttäjä
+</h1>
+<form method="POST" action="{{ url_for('auth_register') }}">
+	<div class="form-group col-md-6">
+		{{ form.username.label }}
+		{{ form.username(class_="form-control") }}
+		<ul class="list-group list-group-flush text-danger">
+			{% if error %}
+				<li class="list-group-item">{{ error }}</li>
+			{% endif %}
+			{% for error in form.username.errors %}
+				<li class="list-group-item">{{ error }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="form-group col-md-6">
+		{{ form.password.label }}
+		{{ form.password(class_="form-control") }}
+		<ul class="list-group list-group-flush text-danger">
+			{% for error in form.password.errors %}
+				<li class="list-group-item">{{ error }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="form-group col-md-6">
+		<input class="btn btn-primary" type="submit" value="Rekisteröidy">
+	</div>
+</form>
 
 {% endblock %}

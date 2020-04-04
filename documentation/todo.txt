@@ -1,4 +1,5 @@
 uuden käyttäjän rekisteröinti
+	käyttäjän, salasanan validointiin lisäystä
 
 albumit, lisää albumi näkyy vain jos kirjautunut
 

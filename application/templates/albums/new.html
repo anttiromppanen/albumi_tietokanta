@@ -1,61 +1,30 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<h1>Lisää albumi</h1>
+<h1 class="text-primary">Lisää albumi</h1>
 <form method="POST" action="{{ url_for('albums_create') }}">
-	<table>
-		<tr>
-			<td>
-				{{ form.artisti.label }}
-			</td>
-			<td>
-				{{ form.artisti }}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{{ form.nimi.label }}
-			</td>
-			<td>
-				{{ form.nimi }}
-			</td>
-			<td>
-				<ul>
-					{% for error in form.nimi.errors %}
-						<li>{{ error }}</li>
-					{% endfor %}
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{{ form.julkaisuvuosi.label }}
-			</td>
-			<td>
-				{{ form.julkaisuvuosi }}
-			</td>
-			<td>
-				<ul>
-					{% for error in form.julkaisuvuosi.errors %}
-						<li>{{ error }}</li>
-					{% endfor %}
-				</ul>
-			</td>
-		<tr>
-			<td>
-				{{ form.tahtien_maara.label }}
-			</td>
-			<td>
-				{% for subfield in form.tahtien_maara %}
-					{{ subfield.label }} {{ subfield }}
-				{% endfor %}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="submit" value="Lisää uusi albumi" />
-			</td>
-		</tr>
-	</table>
+	<div class="form-group col-md-6">
+		{{ form.artisti.label }}
+		{{ form.artisti(class_="form-control") }}
+	</div>
+	<div class="form-group col-md-6">
+		{{ form.nimi.label }}
+		{{ form.nimi(class_="form-control") }}
+	</div>
+	<div class="form-group col-md-6">
+		{{ form.julkaisuvuosi.label }}
+		{{ form.julkaisuvuosi(class_="form-control") }}
+	</div>
+	<div class="form-group col-md-6">
+		{{ form.tahtien_maara.label(class_="mr-3") }}
+		{% for tahti in form.tahtien_maara %}
+		<div class="form-check form-check-inline">
+			{{ tahti.label(class_="form-check-label pr-1") }} {{ tahti(class_="form-check-input") }}
+		</div>
+		{% endfor %}
+	</div>
+	<div class="form-group col-md-6">
+		<input class="btn btn-primary" type="submit" value="Lisää uusi albumi">
+	</div>
 </form>
 {% endblock %}
