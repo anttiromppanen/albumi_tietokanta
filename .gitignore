@@ -139,5 +139,4 @@ cython_debug/
 
 # static files generated from Django application using `collectstatic`
 media
-static
 albumit_tietokanta.db
