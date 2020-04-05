@@ -1,35 +1,58 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<h1 class="text-grey d-block text-center">
-	<i class="fas fa-record-vinyl"></i>
-</h1>
-<h1 class="text-primary text-center">Lisää albumi</h1>
-<div class="container d-flex justify-content-center">
-	<form method="POST" action="{{ url_for('albums_create') }}">
-		<div class="form-group">
-			{{ form.artisti.label }}
-			{{ form.artisti(class_="form-control") }}
-		</div>
-		<div class="form-group">
-			{{ form.nimi.label }}
-			{{ form.nimi(class_="form-control") }}
-		</div>
-		<div class="form-group">
-			{{ form.julkaisuvuosi.label }}
-			{{ form.julkaisuvuosi(class_="form-control") }}
-		</div>
-		<div class="form-group">
-			{{ form.tahtien_maara.label(class_="mr-3") }}
-			{% for tahti in form.tahtien_maara %}
-			<div class="form-check form-check-inline">
-				{{ tahti.label(class_="form-check-label pr-1") }} {{ tahti(class_="form-check-input") }}
+<div class="container w-50 h-100 py-2 rounded form-bg">
+	<h1 class="text-info d-block text-center">
+		<i class="fas fa-record-vinyl"></i>
+	</h1>
+	<h1 class="text-light text-center">Lisää albumi</h1>
+	<div class="container d-flex justify-content-center">
+		<form method="POST" action="{{ url_for('albums_create') }}">
+			<div class="form-group">
+				{{ form.artisti.label(class_="text-white") }}
+				{{ form.artisti(class_="form-control") }}
+				<ul class="list-group list-group-flush text-danger">
+					{% for error in form.artisti.errors %}
+						<li class="list-group-item bg-transparent h6 text-warning pb-0">
+							<i class="fas fa-exclamation-triangle"></i> {{ error }}
+						</li>
+					{% endfor %}
+				</ul>
 			</div>
-			{% endfor %}
-		</div>
-		<div class="form-group">
-			<input class="btn btn-danger" type="submit" value="Lisää uusi albumi">
-		</div>
-	</form>
+			<div class="form-group">
+				{{ form.nimi.label(class_="text-white") }}
+				{{ form.nimi(class_="form-control") }}
+				<ul class="list-group list-group-flush text-danger">
+					{% for error in form.nimi.errors %}
+						<li class="list-group-item bg-transparent h6 text-warning pb-0">
+							<i class="fas fa-exclamation-triangle"></i> {{ error }}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="form-group">
+				{{ form.julkaisuvuosi.label(class_="text-white") }}
+				{{ form.julkaisuvuosi(class_="form-control") }}
+				<ul class="list-group list-group-flush text-danger">
+					{% for error in form.julkaisuvuosi.errors %}
+						<li class="list-group-item bg-transparent h6 text-warning pb-0">
+							<i class="fas fa-exclamation-triangle"></i> {{ error }}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="form-group">
+				{{ form.tahtien_maara.label(class_="mr-3 text-white") }}
+				{% for tahti in form.tahtien_maara %}
+				<div class="form-check form-check-inline">
+					{{ tahti.label(class_="form-check-label pr-1 text-white") }} {{ tahti(class_="form-check-input") }}
+				</div>
+				{% endfor %}
+			</div>
+			<div class="form-group">
+				<input class="btn btn-danger" type="submit" value="Lisää uusi albumi">
+			</div>
+		</form>
+	</div>
 </div>
 {% endblock %}

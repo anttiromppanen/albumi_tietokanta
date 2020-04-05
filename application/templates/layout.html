@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
   </head>
 
-	<body class="bg">
+	<body class="bg h-100">
     <nav class="navbar navbar-expand-md navbar-primary bg-transparent mb-4">
       <a class="navbar-brand text-white font-weight-light" href="{{ url_for('index') }}">
 				<span class="btn btn-light font-weight-bold text-dark"><i class="fas fa-guitar fa-2x"></i>Albumi</span> tietokanta</a
@@ -34,13 +34,13 @@
         <ul class="navbar-nav mr-auto">
 				{% if current_user.is_authenticated %}
           <li class="nav-item mr-2">
-            <a class="nav-link text-light btn btn-primary text-weight-bold" href="{{ url_for('albums_index') }} "
-              ><i class="fas fa-list-ul fa-lg mr-1 text-dark"></i>Albumit</a
+            <a class="nav-link text-light btn btn-dark text-weight-bold" href="{{ url_for('albums_index') }} "
+              ><i class="fas fa-list-ul fa-lg mr-1 text-white"></i>Albumit</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light btn btn-primary text-weight-bold" href="{{ url_for('albums_form') }} "
-              ><i class="fas fa-plus fa-lg mr-1 text-dark"></i>Lisää albumi</a
+            <a class="nav-link text-light btn btn-dark text-weight-bold" href="{{ url_for('albums_form') }} "
+              ><i class="fas fa-plus fa-lg mr-1 text-white"></i>Lisää albumi</a
             >
           </li>
 				{% endif %}
