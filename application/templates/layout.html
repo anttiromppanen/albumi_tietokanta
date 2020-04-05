@@ -9,10 +9,11 @@
       href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/minty/bootstrap.min.css"
       crossorigin="anonymous"
     />
+		<link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
   </head>
 
-  <body>
-    <nav class="navbar navbar-expand-md navbar-primary bg-primary mb-4">
+	<body class="bg">
+    <nav class="navbar navbar-expand-md navbar-primary bg-transparent mb-4">
       <a class="navbar-brand text-white font-weight-light" href="{{ url_for('index') }}">
 				<span class="btn btn-light font-weight-bold text-dark"><i class="fas fa-guitar fa-2x"></i>Albumi</span> tietokanta</a
       >

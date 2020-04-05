@@ -1,18 +1,18 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1 class="text-grey d-block text-center">
+<h1 class="text-info d-block text-center">
 	<i class="fas fa-sign-in-alt fa-lg"></i>
 </h1>
-<h1 class="text-primary text-center">Kirjaudu sisään</h1>
+<h1 class="text-light text-center">Kirjaudu sisään</h1>
 <div class="container d-flex justify-content-center">
 	<form method="POST" action="{{ url_for('auth_login') }}">
 		<div class="form-group col">
-			{{ form.username.label }}
+			{{ form.username.label(class_="text-white") }}
 			{{ form.username(class_="form-control") }}
 		</div>
 		<div class="form-group col">
-			{{ form.password.label }}
+			{{ form.password.label(class_="text-white") }}
 			{{ form.password(class_="form-control") }}
 		</div>
 		<div class="form-group col">
