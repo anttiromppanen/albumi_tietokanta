@@ -8,15 +8,11 @@ body, html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-	background-image: linear-gradient(to bottom, rgba(108,195,213,1) 0%,rgba(255,120,81,0.1) 100%), url('bg.jpg');
+	background-image: linear-gradient(to bottom, rgba(108,195,213,1) 15%,rgba(255,120,81,0.1) 100%), url('bg.jpg');
 }
 
 .form-bg {
 	background-color: rgba(0, 0, 0, 0.5);
-}
-
-.nav-bg {
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .albumit-bg {
@@ -30,4 +26,8 @@ body, html {
 
 .shadoust {
   text-shadow: 1px 2px 1px rgba(0,0,0,0.2);
+}
+
+.no-shadoust {
+  text-shadow: 0 0 0 !important;
 }

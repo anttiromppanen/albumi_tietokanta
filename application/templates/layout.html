@@ -13,7 +13,7 @@
   </head>
 
 	<body class="bg h-100">
-    <nav class="navbar navbar-expand-md navbar-primary nav-bg mb-4">
+    <nav class="navbar navbar-expand-md navbar-primary bg-info mb-4">
       <a class="navbar-brand text-white font-weight-light" href="{{ url_for('index') }}">
 				<span class="navbar-brand font-weight-bold text-light p-0 m-0 shadoust">Albumi</span> tietokanta</a
       >
@@ -34,13 +34,13 @@
         <ul class="navbar-nav mr-auto">
 				{% if current_user.is_authenticated %}
           <li class="nav-item mr-2">
-            <a class="nav-link text-light btn btn-lg text-weight-bold shadoust" href="{{ url_for('albums_index') }} "
-              ><i class="fas fa-list-ul mr-1 text-info shadoust"></i>Albumit</a
+            <a class="nav-link text-white btn btn-lg btn-info text-weight-bold shadoust pt-1 pb-1" href="{{ url_for('albums_index') }} "
+              ><i class="fas fa-list-ul mr-1 text-danger no-shadoust"></i>Albumit</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light btn btn-lg text-weight-bold shadoust" href="{{ url_for('albums_form') }} "
-              ><i class="fas fa-plus mr-1 text-info shadoust"></i>Lisää albumi</a
+            <a class="nav-link text-white btn btn-lg btn-info text-weight-bold shadoust pt-1 pb-1" href="{{ url_for('albums_form') }} "
+              ><i class="fas fa-plus mr-1 text-danger no-shadoust"></i>Lisää albumi</a
             >
           </li>
 				{% endif %}
