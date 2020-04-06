@@ -1,12 +1,14 @@
 {% extends "layout.html" %} {% block body %}
-<div class="album py-5 bg-light">
+<div class="album py-4 pl-2 pr-2 albumit-bg rounded-top">
   <div class="container">
+    <h1 class="text-center text-light mb-4">Lisäämäsi albumit</h1>
     <div class="row">
       {% for album in albums %}
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
-          <svg
-            class="bd-placeholder-img card-img-top"
+          <a href="#{{ album.esittajat_albumit_id }}" data-toggle="collapse">
+            <svg
+            class="bd-placeholder-img card-img-top p-1 shadow-sm"
             width="100%"
             height="225"
             xmlns="http://www.w3.org/2000/svg"
@@ -15,36 +17,38 @@
             role="img"
             aria-label="Placeholder: Thumbnail"
           >
-            <title>Albumi</title>
-            <rect width="100%" height="100%" fill="#55595c"></rect>
-            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Albumi</text>
-          </svg>
-          <div class="card-body">
-            <p class="card-text">
+              <title>{{ album.albumi }}</title>
+              <rect width="100%" height="100%" fill="#78C2AD"></rect>
+              <text class="h3" x="5%" y="90%" fill="#f8f9fa" dy=".3em">{{ album.albumi}}
+                <tspan class="h5" x="5%" y="77%" fill="#FFF" dy=".3em">{{ album.esittaja }}</tspan>
+              </text>
+            </svg>
+          </a>
+          <div id={{ album.esittajat_albumit_id }} class="card-body collapse pt-0 pr-1 pb-1 pl-1">
+            <p class="card-text d-none">
               <ul class="list-group">
-                <li class="list-group-item">
-                  Esittäjä: {{ album.esittaja }}
+                <li class="list-group-item rounded-0">
+                  <span class="text-dark">Esittäjä:</span> {{ album.esittaja }}
                 </li>
                 <li class="list-group-item">
-                  Albumi: {{ album.albumi }}
+                  <span class="text-dark">Albumi:</span> {{ album.albumi }}
                 </li>
                 <li class="list-group-item">
-                  Julkaisuvuosi: {{ album.julkaisuvuosi }}
+                  <span class="text-dark">Julkaisuvuosi:</span> {{ album.julkaisuvuosi }}
                 </li>
-                <li class="list-group-item">
-                  Tähdet:
+                <li class="list-group-item rounded-0">
                   {% for i in range(0, album.tahtien_maara) %}
                     <i class="fas fa-star text-warning"></i>
                   {% endfor %}
                 </li>
               </ul>
             </p>
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-center align-items-center pb-2">
               <div class="btn-group">
-                <a href="#" class="btn btn-outline-primary">
+                <a href="{{ url_for('album_via_id', album_id = album.album_id) }}" class="btn btn-outline-primary rounded mr-2">
                   Muokkaa
                 </a>
-                <a href="#" class="btn btn-outline-danger">
+                <a href="{{ url_for('album_delete', album_id = album.esittajat_albumit_id) }}" class="btn btn-outline-danger rounded ml-2">
                   Poista
                 </a>
               </div>

@@ -1,5 +1,4 @@
-albumit
-	cardit toimimaan ensin tietokannan datalla ja blank kuvalla
+albumin muokkaussivun ulkoasu
 
 etusivu
 	jotain sisältöä

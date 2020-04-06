@@ -14,3 +14,12 @@ body, html {
 .form-bg {
 	background-color: rgba(0, 0, 0, 0.3);
 }
+
+.albumit-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 100vh;
+}
+
+.card-height {
+  height: 225px;
+}
