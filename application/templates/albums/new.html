@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<div class="container w-50 h-100 py-2 rounded form-bg">
+<div class="container w-50 h-100 py-3 rounded form-bg">
 	<h1 class="text-info d-block text-center">
-		<i class="fas fa-record-vinyl"></i>
+		<i class="fas fa-record-vinyl fa-2x"></i>
 	</h1>
 	<h1 class="text-light text-center">Lisää albumi</h1>
 	<div class="container d-flex justify-content-center">
 		<form method="POST" action="{{ url_for('albums_create') }}">
-			<div class="form-group">
+			<div class="form-group mb-1">
 				{{ form.artisti.label(class_="text-white") }}
 				{{ form.artisti(class_="form-control") }}
 				<ul class="list-group list-group-flush text-danger">
@@ -19,7 +19,7 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<div class="form-group">
+			<div class="form-group mb-1">
 				{{ form.nimi.label(class_="text-white") }}
 				{{ form.nimi(class_="form-control") }}
 				<ul class="list-group list-group-flush text-danger">
@@ -30,7 +30,7 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<div class="form-group">
+			<div class="form-group mb-1">
 				{{ form.julkaisuvuosi.label(class_="text-white") }}
 				{{ form.julkaisuvuosi(class_="form-control") }}
 				<ul class="list-group list-group-flush text-danger">
@@ -41,7 +41,7 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<div class="form-group">
+			<div class="form-group mb-1">
 				{{ form.tahtien_maara.label(class_="mr-3 text-white") }}
 				{% for tahti in form.tahtien_maara %}
 				<div class="form-check form-check-inline">
