@@ -12,7 +12,11 @@ body, html {
 }
 
 .form-bg {
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.nav-bg {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .albumit-bg {
