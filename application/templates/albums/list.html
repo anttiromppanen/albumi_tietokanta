@@ -1,26 +1,59 @@
-{% extends "layout.html" %}
-
-{% block body %}
-  <table>
-    <tr>
-			<th>Esittäjä</th>
-      <th>Albumin nimi</th>
-      <th>Julkaisuvuosi</th>
-      <th>Tähtien määrä</th>
-    </tr>
-    {% for album in albums %}
-    <tr>
-			<td>{{ album.esittaja }}</td>
-      <td>{{ album.albumi }}</td>
-      <td>{{ album.julkaisuvuosi }}</td>
-      <td>{{ album.tahtien_maara }}</td>
-			<td>
-				<a href="{{ url_for('album_via_id', album_id = album.album_id) }}">muokkaa</a>
-				<form action="{{ url_for('album_delete', album_id = album.esittajat_albumit_id) }}">
-					<input type="submit" value="poista">
-				</form>
-			</td>
-    </tr>
-    {% endfor %}
-  </table>
+{% extends "layout.html" %} {% block body %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      {% for album in albums %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <svg
+            class="bd-placeholder-img card-img-top"
+            width="100%"
+            height="225"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+          >
+            <title>Albumi</title>
+            <rect width="100%" height="100%" fill="#55595c"></rect>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Albumi</text>
+          </svg>
+          <div class="card-body">
+            <p class="card-text">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  Esittäjä: {{ album.esittaja }}
+                </li>
+                <li class="list-group-item">
+                  Albumi: {{ album.albumi }}
+                </li>
+                <li class="list-group-item">
+                  Julkaisuvuosi: {{ album.julkaisuvuosi }}
+                </li>
+                <li class="list-group-item">
+                  Tähdet:
+                  {% for i in range(0, album.tahtien_maara) %}
+                    <i class="fas fa-star text-warning"></i>
+                  {% endfor %}
+                </li>
+              </ul>
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="#" class="btn btn-outline-primary">
+                  Muokkaa
+                </a>
+                <a href="#" class="btn btn-outline-danger">
+                  Poista
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}

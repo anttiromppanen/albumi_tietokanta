@@ -1,13 +1,15 @@
 albumit
-	albumien listaus paremmaksi
+	cardit toimimaan ensin tietokannan datalla ja blank kuvalla
 
 etusivu
 	jotain sisältöä
+	monimutkainen tietokantakysely
 
 uuden käyttäjän rekisteröinti
 	käyttäjän, salasanan validointiin lisäystä
 
-monimutkainen tietokantakysely
-
 bootstraparin hinkkausta
 	text-shadow
+
+albumit
+	card-bg random levy svg valituista väreistä

@@ -137,6 +137,10 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# vscode
+.vscode
+
+
 # static files generated from Django application using `collectstatic`
 media
 albumit_tietokanta.db
