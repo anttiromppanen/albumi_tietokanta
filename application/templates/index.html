@@ -4,9 +4,9 @@
 	{{ albums_by_user }}
 	<p>
 		{% if current_user.is_authenticated %}
-		<h1 class="text-center text-light">Tervetuloa <span class="text-info">{{ current_user.username }}</span></h1>		
+		<h1 class="text-center text-light shadoust">Tervetuloa <span class="text-dark">{{ current_user.username }}</span></h1>		
 		{% else %}
-		<h1 class="text-center text-light">Kirjaudu sisään</h1>
+		<h1 class="text-center text-light shadoust">Kirjaudu sisään</h1>
 		{% endif %}
   </p>
 {% endblock %}
