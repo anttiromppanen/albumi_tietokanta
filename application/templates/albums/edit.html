@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+
+<h1>Muokkaa albumia</h1>
+<form method="POST" action="{{ url_for('album_edit', album_id = albumi.id) }}">
+	
+</form>
+{% endblock %}

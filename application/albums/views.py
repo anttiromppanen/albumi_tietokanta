@@ -19,13 +19,14 @@ def albums_index():
 @app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
 def album_via_id(album_id):
-    album = Album.query.get(album_id)
+    album = EsittajatAlbumit.get_album_by_id(album_id)
 
+    print(album)
     # tälle joku error-viesti
-    if not album.account_id == current_user.id:
-        return redirect(url_for("albums_index"))
+    #if not album.lisaaja_id == current_user.id:
+    #    return redirect(url_for("albums_index"))
 
-    return render_template("albums/id.html", albumi = album, form = AlbumEditForm())
+    return render_template("albums/edit.html", albumi = album, form = AlbumEditForm())
 
 @app.route("/albums/<album_id>/", methods=["POST"])
 @login_required
@@ -34,7 +35,7 @@ def album_edit(album_id):
     form = AlbumEditForm(request.form)
 
     if not form.validate_on_submit():
-        return render_template("albums/id.html", albumi = album, form = form)
+        return render_template("albums/edit.html", albumi = album, form = form)
 
     album.tahtien_maara = form.tahtien_maara.data
     db.session().commit()
@@ -54,29 +55,38 @@ def albums_create():
     if not form.validate_on_submit():
         return render_template("albums/new.html", form = form)
 
-    esittajanNimi = form.artisti.data
-    albuminNimi = form.nimi.data
+    esittajanNimi = form.artisti.data.lower()
+    albuminNimi = form.nimi.data.lower()
     julkaisuvuosi = form.julkaisuvuosi.data
     tahtien_maara = int(form.tahtien_maara.data)
 
-    albumi = Album(albuminNimi, julkaisuvuosi, tahtien_maara)
-    albumi.account_id = current_user.id
-
     loytyykoEsittaja = Esittaja.query.filter_by(nimi = esittajanNimi).first()
-    loytyykoAlbumi = Album.query.filter_by(nimi = albuminNimi).first()
 
     esittaja = Esittaja(esittajanNimi)
 
+    # albumi vaatii esittäjän, lisätään uusi esittäjä, jos None
     if not loytyykoEsittaja:
         db.session().add(esittaja)
         db.session().commit()
+
+    loytyykoEsittaja = Esittaja.query.filter_by(nimi = esittajanNimi).first()
+
+    albumi = Album(albuminNimi, loytyykoEsittaja.id, julkaisuvuosi, tahtien_maara, current_user.id)
+
+    # Albumi lisätään jos None
+    loytyykoAlbumi = Album.query.filter(
+            Album.nimi == albuminNimi,
+            Album.artist_id == loytyykoEsittaja.id
+            ).first()
 
     if not loytyykoAlbumi:
         db.session().add(albumi)
         db.session().commit()
 
-    loytyykoEsittaja = Esittaja.query.filter_by(nimi = esittajanNimi).first()
-    loytyykoAlbumi = Album.query.filter_by(nimi = albuminNimi).first()
+    loytyykoAlbumi = Album.query.filter(
+            Album.nimi == albuminNimi,
+            Album.artist_id == loytyykoEsittaja.id
+            ).first()
 
     loytyykoEsittajaJaAlbumi = EsittajatAlbumit.query.filter(
             EsittajatAlbumit.albumi_id == loytyykoAlbumi.id,
@@ -84,9 +94,12 @@ def albums_create():
             EsittajatAlbumit.lisaaja_id == current_user.id
             ).first()
 
+    # Jos artistin albumi on jo lisätty, error ja pysytään formissa
     if not loytyykoEsittajaJaAlbumi:
         esittajaJaAlbumi = EsittajatAlbumit(loytyykoAlbumi.id, loytyykoEsittaja.id, current_user.id)
         db.session().add(esittajaJaAlbumi)
+    else:
+        return render_template("albums/new.html", form = form, error = "Olet lisännyt jo kyseisen albumin")
 
     db.session().commit()
 

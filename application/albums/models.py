@@ -8,8 +8,11 @@ class Album(Base):
     tahtien_maara = db.Column(db.Integer, nullable=False)
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey('esittaja.id'), nullable=False)
 
-    def __init__(self, nimi, julkaisuvuosi, tahtien_maara):
-        self.nimi = nimi
+    def __init__(self, nimi, artisti_id, julkaisuvuosi, tahtien_maara, account_id):
+        self.nimi = nimi.lower()
+        self.artist_id = artisti_id
         self.julkaisuvuosi = julkaisuvuosi
         self.tahtien_maara = tahtien_maara
+        self.account_id = account_id

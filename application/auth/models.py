@@ -11,7 +11,7 @@ class User(Base):
     albums = db.relationship("Album", backref='account', lazy=True)
 
     def __init__(self, username, password):
-        self.username = username
+        self.username = username.lower()
         self.password = password
   
     def get_id(self):

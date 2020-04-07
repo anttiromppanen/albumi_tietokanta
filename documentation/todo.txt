@@ -1,3 +1,6 @@
+kirjautuminen
+	väärien tunnusten error
+
 albumin muokkaussivun ulkoasu
 
 etusivu

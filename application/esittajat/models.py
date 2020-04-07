@@ -8,4 +8,4 @@ class Esittaja(Base):
    nimi = db.Column(db.String(144), nullable=False)
 
    def __init__(self, nimi):
-       self.nimi = nimi
+       self.nimi = nimi.lower()

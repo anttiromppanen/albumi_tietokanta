@@ -6,6 +6,13 @@
 		<i class="fas fa-record-vinyl fa-2x"></i>
 	</h1>
 	<h1 class="text-light text-center">Lisää albumi</h1>
+	{% if error %}
+		<div class="container">
+			<h5 class="text-center text-warning">
+				<i class="fas fa-exclamation-triangle"></i>	{{ error }}
+			</h5>
+		</div>
+	{% endif %}
 	<div class="container d-flex justify-content-center">
 		<form method="POST" action="{{ url_for('albums_create') }}">
 			<div class="form-group mb-1">
