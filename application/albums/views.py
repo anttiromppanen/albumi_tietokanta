@@ -19,14 +19,18 @@ def albums_index():
 @app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
 def album_via_id(album_id):
-    album = EsittajatAlbumit.get_album_by_id(album_id)
-
-    print(album)
+    esittajaJaAlbumi = EsittajatAlbumit.query.filter(
+        EsittajatAlbumit.albumi_id == album_id,
+        EsittajatAlbumit.lisaaja_id == current_user.id
+        ).first()
+    esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
+    albumi = Album.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
+    
     # tälle joku error-viesti
-    #if not album.lisaaja_id == current_user.id:
-    #    return redirect(url_for("albums_index"))
+    if not esittajaJaAlbumi.lisaaja_id == current_user.id:
+        return redirect(url_for("albums_index"))
 
-    return render_template("albums/edit.html", albumi = album, form = AlbumEditForm())
+    return render_template("albums/edit.html", esittaja = esittaja, albumi = albumi, form = AlbumEditForm())
 
 @app.route("/albums/<album_id>/", methods=["POST"])
 @login_required

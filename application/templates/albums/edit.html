@@ -1,11 +1,41 @@
 {% extends "layout.html" %}
 
 {% block body %}
-
-
-
-<h1>Muokkaa albumia</h1>
-<form method="POST" action="{{ url_for('album_edit', album_id = albumi.id) }}">
-	
-</form>
+<!-- 
+  data: esittaja, albumi
+ -->
+<div class="container w-50 h-100 py-3 rounded form-bg">
+	<h1 class="text-info d-block text-center">
+		<i class="fas fa-record-vinyl fa-2x"></i>
+	</h1>
+	<h1 class="text-light text-center">Muokkaa albumia</h1>
+	{% if error %}
+		<div class="container">
+			<h5 class="text-center text-warning">
+				<i class="fas fa-exclamation-triangle"></i>	{{ error }}
+			</h5>
+		</div>
+	{% endif %}
+	<div class="container d-flex justify-content-center">
+		<form method="POST" action="{{ url_for('album_edit', album_id = albumi.id) }}">
+      <h5 class="text-info">Artisti</h5>
+      <h6 class="text-white">{{ esittaja.nimi }}</h6> <hr>
+      <h5 class="text-info">Albumin nimi</h5>
+      <h6 class="text-white">{{ albumi.nimi }}</h6> <hr>
+      <h5 class="text-info">Julkaisuvuosi</h5>
+      <h6 class="text-white">{{ albumi.julkaisuvuosi }}</h6> <hr>
+      <div class="form-group mb-1">
+				{{ form.tahtien_maara.label(class_="mr-3 text-info h5") }}
+				{% for tahti in form.tahtien_maara %}
+				<div class="form-check form-check-inline">
+					{{ tahti.label(class_="form-check-label pr-1 text-white") }} {{ tahti(class_="form-check-input") }}
+				</div>
+				{% endfor %}
+			</div>
+			<div class="form-group">
+				<input class="btn btn-danger" type="submit" value="Muokkaa albumia">
+			</div>
+		</form>
+	</div>
+</div>
 {% endblock %}

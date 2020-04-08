@@ -1,3 +1,7 @@
+tähtien määrän siirtäminen albumi -> esittajat_albumit, koska tällä hetkellä
+jos usea käyttäjä on lisännyt saman albumin, ja joku muokkaa albumia, myös muiden lisäämiin albumeihin
+tulee sama muutos.
+
 kirjautuminen
 	väärien tunnusten error
 
@@ -15,3 +19,5 @@ bootstraparin hinkkausta
 
 albumit
 	card-bg random levy svg valituista väreistä
+
+kappale-taulun lisäys ja kappaleiden lisäys albumeihin
