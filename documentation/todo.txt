@@ -5,8 +5,6 @@ tulee sama muutos.
 kirjautuminen
 	väärien tunnusten error
 
-albumin muokkaussivun ulkoasu
-
 etusivu
 	jotain sisältöä
 	monimutkainen tietokantakysely
