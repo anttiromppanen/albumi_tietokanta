@@ -48,7 +48,7 @@
         <div class="form-inline mt-2 mt-md-0">
           {% if current_user.is_authenticated %}
           <a class="btn btn-danger" href="{{ url_for('auth_logout') }}"
-						>kirjaudu ulos</a
+						>kirjaudu ulos, {{ current_user.username }}</a
           >
           {% else %}
           <a class="btn btn-light" href="{{ url_for('auth_login') }}">Kirjaudu</a>

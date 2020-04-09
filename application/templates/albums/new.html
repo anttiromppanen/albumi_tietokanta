@@ -16,7 +16,7 @@
 	<div class="container d-flex justify-content-center">
 		<form method="POST" action="{{ url_for('albums_create') }}">
 			<div class="form-group mb-1">
-				{{ form.artisti.label(class_="text-white") }}
+				{{ form.artisti.label(class_="text-light h6") }}
 				{{ form.artisti(class_="form-control") }}
 				<ul class="list-group list-group-flush text-danger">
 					{% for error in form.artisti.errors %}
@@ -27,7 +27,7 @@
 				</ul>
 			</div>
 			<div class="form-group mb-1">
-				{{ form.nimi.label(class_="text-white") }}
+				{{ form.nimi.label(class_="text-light h6") }}
 				{{ form.nimi(class_="form-control") }}
 				<ul class="list-group list-group-flush text-danger">
 					{% for error in form.nimi.errors %}
@@ -38,7 +38,7 @@
 				</ul>
 			</div>
 			<div class="form-group mb-1">
-				{{ form.julkaisuvuosi.label(class_="text-white") }}
+				{{ form.julkaisuvuosi.label(class_="text-light h6") }}
 				{{ form.julkaisuvuosi(class_="form-control") }}
 				<ul class="list-group list-group-flush text-danger">
 					{% for error in form.julkaisuvuosi.errors %}
@@ -49,7 +49,7 @@
 				</ul>
 			</div>
 			<div class="form-group mb-1">
-				{{ form.tahtien_maara.label(class_="mr-3 text-white") }}
+				{{ form.tahtien_maara.label(class_="mr-3 text-white h6") }}
 				{% for tahti in form.tahtien_maara %}
 				<div class="form-check form-check-inline">
 					{{ tahti.label(class_="form-check-label pr-1 text-white") }} {{ tahti(class_="form-check-input") }}
