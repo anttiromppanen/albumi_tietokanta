@@ -14,6 +14,9 @@ from application.esittajat_albumit.models import EsittajatAlbumit
 @app.route("/albums", methods=["GET"])
 @login_required
 def albums_index():
+    if current_user.user_group == 1:
+        return render_template("albums/list.html", albums = EsittajatAlbumit.get_all_albums())
+
     return render_template("albums/list.html", albums = EsittajatAlbumit.get_albums_by_user())
 
 @app.route("/albums/<album_id>/", methods=["GET"])

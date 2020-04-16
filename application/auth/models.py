@@ -9,10 +9,12 @@ class User(Base):
     password = db.Column(db.String(144), nullable=False)
 
     albums = db.relationship("Album", backref='account', lazy=True)
+    user_group = db.Column(db.Integer, db.ForeignKey('user_group.id'), nullable=False)
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, user_group):
         self.username = username.lower()
         self.password = password
+        self.user_group = user_group
   
     def get_id(self):
         return self.id
@@ -25,3 +27,6 @@ class User(Base):
 
     def is_authenticated(self):
         return True
+
+    def roles(self):
+        return self.user_group

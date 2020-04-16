@@ -43,3 +43,27 @@ class EsittajatAlbumit(Base):
                 "lisaaja_id": row[6]})
 
         return result
+
+    @staticmethod
+    def get_all_albums():
+        stmt = text("SELECT Esittaja.nimi, Album.nimi,"
+                    " Album.julkaisuvuosi, Album.tahtien_maara,"
+                    " Album.id, Esittajat_albumit.id, Esittajat_albumit.lisaaja_id"
+                    " FROM Esittajat_albumit, Esittaja, Album WHERE"
+                    " Esittajat_albumit.albumi_id = Album.id AND"
+                    " Esittajat_albumit.esittaja_id = Esittaja.id")
+
+        res = db.engine.execute(stmt)
+
+        result = []
+        for row in res:
+            result.append({
+                "esittaja": row[0],
+                "albumi": row[1],
+                "julkaisuvuosi": row[2],
+                "tahtien_maara": row[3],
+                "album_id": row[4],
+                "esittajat_albumit_id": row[5],
+                "lisaaja_id": row[6]})
+
+        return result
