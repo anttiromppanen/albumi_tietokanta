@@ -22,10 +22,23 @@ def albums_index():
 @app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
 def album_via_id(album_id):
+    # Näytetään kaikki albumit, jos käyttäjä on admin
+    if current_user.user_group == 1:
+        esittajaJaAlbumi = EsittajatAlbumit.query.filter(
+        EsittajatAlbumit.albumi_id == album_id
+        ).first()
+
+        esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
+        albumi = Album.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
+
+        return render_template("albums/edit.html", esittaja = esittaja, albumi = albumi, form = AlbumEditForm())
+
+    # Käyttäjä ei ollut admin, näytetään käyttäjän x lisäämät albumit
     esittajaJaAlbumi = EsittajatAlbumit.query.filter(
         EsittajatAlbumit.albumi_id == album_id,
         EsittajatAlbumit.lisaaja_id == current_user.id
         ).first()
+        
     esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
     albumi = Album.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
     

@@ -7,7 +7,9 @@ kirjautuminen
 
 etusivu
 	jotain sisältöä
-	monimutkainen tietokantakysely
+
+admin
+	albumien näkymään albumin lisääjän nimi
 
 uuden käyttäjän rekisteröinti
 	käyttäjän, salasanan validointiin lisäystä
