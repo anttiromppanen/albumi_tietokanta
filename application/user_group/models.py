@@ -6,7 +6,7 @@ class UserGroup(Base):
   __tablename__ = "user_group"
 
   # 1 = admin, 2 = user
-  group = db.Column(db.Integer, nullable=False)
+  user_group = db.Column(db.Integer, nullable=False)
 
-  def __init__(self, group):
-    self.group = group
+  def __init__(self, user_group):
+    self.user_group = user_group
