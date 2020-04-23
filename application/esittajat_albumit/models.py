@@ -70,3 +70,17 @@ class EsittajatAlbumit(Base):
                 "lisaaja_id": row[6]})
 
         return result
+
+    @staticmethod
+    def get_num_of_albums():
+        stmt = text("SELECT COUNT(*), COUNT(DISTINCT lisaaja_id) FROM Esittajat_albumit")
+
+        res = db.engine.execute(stmt)
+
+        result = []
+        for row in res:
+            result.append({
+                "albumien_maara": row[0],
+                "lisaajien_maara": row[1]})
+
+        return result

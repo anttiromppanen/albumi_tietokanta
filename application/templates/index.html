@@ -6,7 +6,9 @@
 		{% if current_user.is_authenticated %}
 		<h1 class="text-center text-light shadoust">Tervetuloa, <span class="text-white font-weight-bold">{{ current_user.username }}</span></h1>		
 		{% else %}
-		<h1 class="text-center text-light shadoust">Kirjaudu sisään</h1>
+		<h2 class="text-center text-light shadoust font-italic">
+			<span class="text-dark h1 font-weight-bold m-0 pl-2 pr-3 bg-light">{{ numOfAlbums.lisaajien_maara }}</span> käyttäjää lisännyt yhteensä <span class="text-dark h1 font-weight-bold ml-1 pl-2 pr-3 bg-light">{{ numOfAlbums.albumien_maara }}</span> albumia 
+		<h2>
 		{% endif %}
   </p>
 {% endblock %}

@@ -20,6 +20,10 @@ body, html {
   min-height: 100vh;
 }
 
+.blak-border {
+  border-color: #000 !important;
+}
+
 .card-height {
   height: 225px;
 }
