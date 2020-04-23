@@ -9,7 +9,7 @@ class User(Base):
     password = db.Column(db.String(144), nullable=False)
 
     albums = db.relationship("Albumi", backref='tili', lazy=True)
-    user_group = db.Column(db.Integer, db.ForeignKey('user_group.id'), nullable=False)
+    user_group = db.Column(db.Integer, db.ForeignKey('kayttajaluokka.id'), nullable=False)
 
     def __init__(self, username, password, user_group):
         self.username = username.lower()

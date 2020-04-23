@@ -3,7 +3,7 @@ from application.models import Base
 
 class UserGroup(Base):
 
-  __tablename__ = "user_group"
+  __tablename__ = "kayttajaluokka"
 
   # 1 = admin, 2 = user
   user_group = db.Column(db.Integer, nullable=False)
