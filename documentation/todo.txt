@@ -1,6 +1,8 @@
 kirjautuminen
 	väärien tunnusten error
 
+kaikki tietokantojen kentät suomenkieliseksi
+
 admin
 	albumien näkymään albumin lisääjän nimi
 	albumien listauksen otsikko erilaiseksi
