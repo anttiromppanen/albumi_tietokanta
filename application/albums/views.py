@@ -54,10 +54,15 @@ def album_edit(album_id):
     album = Album.query.get(album_id)
     form = AlbumEditForm(request.form)
 
+    esittajaAlbumi = EsittajatAlbumit.query.filter(
+        EsittajatAlbumit.albumi_id == album.id,
+        EsittajatAlbumit.lisaaja_id == album.account_id
+        ).first()
+
     if not form.validate_on_submit():
         return render_template("albums/edit.html", albumi = album, form = form)
 
-    album.tahtien_maara = form.tahtien_maara.data
+    esittajaAlbumi.tahtien_maara = form.tahtien_maara.data
     db.session().commit()
 
     return redirect(url_for("albums_index"))
@@ -91,7 +96,7 @@ def albums_create():
 
     loytyykoEsittaja = Esittaja.query.filter_by(nimi = esittajanNimi).first()
 
-    albumi = Album(albuminNimi, loytyykoEsittaja.id, julkaisuvuosi, tahtien_maara, current_user.id)
+    albumi = Album(albuminNimi, loytyykoEsittaja.id, julkaisuvuosi, current_user.id)
 
     # Albumi lisätään jos None
     loytyykoAlbumi = Album.query.filter(
@@ -116,7 +121,7 @@ def albums_create():
 
     # Jos artistin albumi on jo lisätty, error ja pysytään formissa
     if not loytyykoEsittajaJaAlbumi:
-        esittajaJaAlbumi = EsittajatAlbumit(loytyykoAlbumi.id, loytyykoEsittaja.id, current_user.id)
+        esittajaJaAlbumi = EsittajatAlbumit(loytyykoAlbumi.id, loytyykoEsittaja.id, current_user.id, tahtien_maara) 
         db.session().add(esittajaJaAlbumi)
     else:
         return render_template("albums/new.html", form = form, error = "Olet lisännyt jo kyseisen albumin")

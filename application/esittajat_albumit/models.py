@@ -14,15 +14,18 @@ class EsittajatAlbumit(Base):
     esittaja_id = db.Column(db.Integer, db.ForeignKey("esittaja.id"), nullable=False)
     lisaaja_id = db.Column(db.Integer, db.ForeignKey("account.id"), nullable=False)
 
-    def __init__(self, albumi_id, esittaja_id, lisaaja_id):
+    tahtien_maara = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, albumi_id, esittaja_id, lisaaja_id, tahtien_maara):
         self.albumi_id = albumi_id
         self.esittaja_id = esittaja_id
         self.lisaaja_id = lisaaja_id
+        self.tahtien_maara = tahtien_maara
 
     @staticmethod
     def get_albums_by_user():
         stmt = text("SELECT Esittaja.nimi, Album.nimi,"
-                    " Album.julkaisuvuosi, Album.tahtien_maara,"
+                    " Album.julkaisuvuosi, Esittajat_albumit.tahtien_maara,"
                     " Album.id, Esittajat_albumit.id, Esittajat_albumit.lisaaja_id"
                     " FROM Esittajat_albumit, Esittaja, Album WHERE"
                     " Esittajat_albumit.albumi_id = Album.id AND"
@@ -47,7 +50,7 @@ class EsittajatAlbumit(Base):
     @staticmethod
     def get_all_albums():
         stmt = text("SELECT Esittaja.nimi, Album.nimi,"
-                    " Album.julkaisuvuosi, Album.tahtien_maara,"
+                    " Album.julkaisuvuosi, Esittajat_albumit.tahtien_maara,"
                     " Album.id, Esittajat_albumit.id, Esittajat_albumit.lisaaja_id"
                     " FROM Esittajat_albumit, Esittaja, Album WHERE"
                     " Esittajat_albumit.albumi_id = Album.id AND"
