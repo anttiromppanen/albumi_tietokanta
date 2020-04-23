@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from sqlalchemy import func
 
 from application import app, db
-from application.albums.models import Album
+from application.albums.models import Albumi
 from application.albums.forms import AlbumForm, AlbumEditForm
 
 from application.esittajat.models import Esittaja
@@ -29,7 +29,7 @@ def album_via_id(album_id):
         ).first()
 
         esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
-        albumi = Album.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
+        albumi = Albumi.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
 
         return render_template("albums/edit.html", esittaja = esittaja, albumi = albumi, form = AlbumEditForm())
 
@@ -40,7 +40,7 @@ def album_via_id(album_id):
         ).first()
         
     esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
-    albumi = Album.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
+    albumi = Albumi.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
     
     # tälle joku error-viesti
     if not esittajaJaAlbumi.lisaaja_id == current_user.id:
@@ -51,7 +51,7 @@ def album_via_id(album_id):
 @app.route("/albums/<album_id>/", methods=["POST"])
 @login_required
 def album_edit(album_id):
-    album = Album.query.get(album_id)
+    album = Albumi.query.get(album_id)
     form = AlbumEditForm(request.form)
 
     esittajaAlbumi = EsittajatAlbumit.query.filter(
@@ -96,21 +96,21 @@ def albums_create():
 
     loytyykoEsittaja = Esittaja.query.filter_by(nimi = esittajanNimi).first()
 
-    albumi = Album(albuminNimi, loytyykoEsittaja.id, julkaisuvuosi, current_user.id)
+    albumi = Albumi(albuminNimi, loytyykoEsittaja.id, julkaisuvuosi, current_user.id)
 
     # Albumi lisätään jos None
-    loytyykoAlbumi = Album.query.filter(
-            Album.nimi == albuminNimi,
-            Album.artist_id == loytyykoEsittaja.id
+    loytyykoAlbumi = Albumi.query.filter(
+            Albumi.nimi == albuminNimi,
+            Albumi.artist_id == loytyykoEsittaja.id
             ).first()
 
     if not loytyykoAlbumi:
         db.session().add(albumi)
         db.session().commit()
 
-    loytyykoAlbumi = Album.query.filter(
-            Album.nimi == albuminNimi,
-            Album.artist_id == loytyykoEsittaja.id
+    loytyykoAlbumi = Albumi.query.filter(
+            Albumi.nimi == albuminNimi,
+            Albumi.artist_id == loytyykoEsittaja.id
             ).first()
 
     loytyykoEsittajaJaAlbumi = EsittajatAlbumit.query.filter(

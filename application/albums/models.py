@@ -1,7 +1,7 @@
 from application import db
 from application.models import Base
 
-class Album(Base):
+class Albumi(Base):
     # id ja created_at tulee Basesta
     nimi = db.Column(db.String(144), nullable=False)
     julkaisuvuosi = db.Column(db.Integer, nullable=False)

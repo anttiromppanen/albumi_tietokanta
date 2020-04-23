@@ -42,6 +42,7 @@ def auth_register():
     if not form.validate_on_submit():
         return render_template("auth/registerform.html", form = form)
 
+    # user_groupiksi tulee 2, eli user
     user = User(form.username.data, form.password.data, 2)
     db.session().add(user)
     db.session().commit()

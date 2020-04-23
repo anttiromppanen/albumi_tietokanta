@@ -10,7 +10,7 @@ class EsittajatAlbumit(Base):
 
     __tablename__ = "esittajat_albumit"
 
-    albumi_id = db.Column(db.Integer, db.ForeignKey("album.id"), nullable=False)
+    albumi_id = db.Column(db.Integer, db.ForeignKey("albumi.id"), nullable=False)
     esittaja_id = db.Column(db.Integer, db.ForeignKey("esittaja.id"), nullable=False)
     lisaaja_id = db.Column(db.Integer, db.ForeignKey("account.id"), nullable=False)
 
@@ -24,11 +24,11 @@ class EsittajatAlbumit(Base):
 
     @staticmethod
     def get_albums_by_user():
-        stmt = text("SELECT Esittaja.nimi, Album.nimi,"
-                    " Album.julkaisuvuosi, Esittajat_albumit.tahtien_maara,"
-                    " Album.id, Esittajat_albumit.id, Esittajat_albumit.lisaaja_id"
-                    " FROM Esittajat_albumit, Esittaja, Album WHERE"
-                    " Esittajat_albumit.albumi_id = Album.id AND"
+        stmt = text("SELECT Esittaja.nimi, Albumi.nimi,"
+                    " Albumi.julkaisuvuosi, Esittajat_albumit.tahtien_maara,"
+                    " Albumi.id, Esittajat_albumit.id, Esittajat_albumit.lisaaja_id"
+                    " FROM Esittajat_albumit, Esittaja, Albumi WHERE"
+                    " Esittajat_albumit.albumi_id = Albumi.id AND"
                     " Esittajat_albumit.esittaja_id = Esittaja.id AND"
                     " lisaaja_id = :user").params(user=current_user.id)
 
@@ -49,11 +49,11 @@ class EsittajatAlbumit(Base):
 
     @staticmethod
     def get_all_albums():
-        stmt = text("SELECT Esittaja.nimi, Album.nimi,"
-                    " Album.julkaisuvuosi, Esittajat_albumit.tahtien_maara,"
-                    " Album.id, Esittajat_albumit.id, Esittajat_albumit.lisaaja_id"
-                    " FROM Esittajat_albumit, Esittaja, Album WHERE"
-                    " Esittajat_albumit.albumi_id = Album.id AND"
+        stmt = text("SELECT Esittaja.nimi, Albumi.nimi,"
+                    " Albumi.julkaisuvuosi, Esittajat_albumit.tahtien_maara,"
+                    " Albumi.id, Esittajat_albumit.id, Esittajat_albumit.lisaaja_id"
+                    " FROM Esittajat_albumit, Esittaja, Albumi WHERE"
+                    " Esittajat_albumit.albumi_id = Albumi.id AND"
                     " Esittajat_albumit.esittaja_id = Esittaja.id")
 
         res = db.engine.execute(stmt)

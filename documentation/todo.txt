@@ -1,21 +1,12 @@
-tähtien määrän siirtäminen albumi -> esittajat_albumit, koska tällä hetkellä
-jos usea käyttäjä on lisännyt saman albumin, ja joku muokkaa albumia, myös muiden lisäämiin albumeihin
-tulee sama muutos.
-
 kirjautuminen
 	väärien tunnusten error
 
-etusivu
-	jotain sisältöä
-
 admin
 	albumien näkymään albumin lisääjän nimi
+	albumien listauksen otsikko erilaiseksi
 
 uuden käyttäjän rekisteröinti
 	käyttäjän, salasanan validointiin lisäystä
-
-bootstraparin hinkkausta
-	text-shadow
 
 albumit
 	card-bg random levy svg valituista väreistä
