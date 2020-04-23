@@ -12,7 +12,7 @@ class EsittajatAlbumit(Base):
 
     albumi_id = db.Column(db.Integer, db.ForeignKey("albumi.id"), nullable=False)
     esittaja_id = db.Column(db.Integer, db.ForeignKey("esittaja.id"), nullable=False)
-    lisaaja_id = db.Column(db.Integer, db.ForeignKey("account.id"), nullable=False)
+    lisaaja_id = db.Column(db.Integer, db.ForeignKey("tili.id"), nullable=False)
 
     tahtien_maara = db.Column(db.Integer, nullable=False)
 
