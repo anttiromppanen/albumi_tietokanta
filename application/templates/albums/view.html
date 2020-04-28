@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<!-- 
+  data: esittaja, albumi
+ -->
+<div class="container w-50 h-100 py-3 rounded form-bg">
+	<h1 class="text-info d-block text-center">
+		<i class="fas fa-record-vinyl fa-2x"></i>
+	</h1>
+  <h5 class="text-info">Artisti</h5>
+  <h6 class="text-white">{{ esittaja.nimi }}</h6> <hr>
+  <h5 class="text-info">Albumin nimi</h5>
+  <h6 class="text-white">{{ albumi.nimi }}</h6> <hr>
+  <h5 class="text-info">Kappaleet</h5>
+  <form action="#">
+    <input type="text" placeholder="kappaleen nimi">
+    <input type="number" name="" id="" placeholder="pituus">
+    <button type="submit">Lisää kappale</button>
+  </form>
+</div>
+{% endblock %}

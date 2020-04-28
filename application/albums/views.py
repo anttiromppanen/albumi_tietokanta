@@ -19,6 +19,19 @@ def albums_index():
 
     return render_template("albums/list.html", albums = EsittajatAlbumit.get_albums_by_user())
 
+@app.route("/albums/<album_id>", methods=["GET"])
+@login_required
+def album_view_id(album_id):
+    esittajaJaAlbumi = EsittajatAlbumit.query.filter(
+        EsittajatAlbumit.albumi_id == album_id,
+        EsittajatAlbumit.lisaaja_id == current_user.id
+        ).first()
+
+    albumi = Albumi.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
+    esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
+
+    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja)
+
 @app.route("/albums/edit/<album_id>/", methods=["GET"])
 @login_required
 def album_via_id(album_id):
