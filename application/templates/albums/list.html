@@ -44,12 +44,15 @@
                 </li>
               </ul>
             </p>
-            <div class="d-flex justify-content-center align-items-center pb-2">
-              <div class="btn-group">
+            <div class="d-flex justify-content-around align-items-center pb-2">
+              <div class="btn-group w-100">
                 <a href="{{ url_for('album_via_id', album_id = album.album_id) }}" class="btn btn-outline-primary rounded mr-2">
+                  Lisää
+                </a>
+                <a href="{{ url_for('album_via_id', album_id = album.album_id) }}" class="btn btn-outline-warning rounded mr-2">
                   Muokkaa
                 </a>
-                <a href="{{ url_for('album_delete', album_id = album.esittajat_albumit_id) }}" class="btn btn-outline-danger rounded ml-2">
+                <a href="{{ url_for('album_delete', album_id = album.esittajat_albumit_id) }}" class="btn btn-outline-danger rounded">
                   Poista
                 </a>
               </div>

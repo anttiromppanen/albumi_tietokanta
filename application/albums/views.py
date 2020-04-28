@@ -19,7 +19,7 @@ def albums_index():
 
     return render_template("albums/list.html", albums = EsittajatAlbumit.get_albums_by_user())
 
-@app.route("/albums/<album_id>/", methods=["GET"])
+@app.route("/albums/edit/<album_id>/", methods=["GET"])
 @login_required
 def album_via_id(album_id):
     # Näytetään kaikki albumit, jos käyttäjä on admin
