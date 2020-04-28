@@ -13,10 +13,10 @@
   <h5 class="text-info">Albumin nimi</h5>
   <h6 class="text-white">{{ albumi.nimi }}</h6> <hr>
   <h5 class="text-info">Kappaleet</h5>
-  <form action="#">
-    <input type="text" placeholder="kappaleen nimi">
-    <input type="number" name="" id="" placeholder="pituus">
-    <button type="submit">Lisää kappale</button>
+  <form method="POST" action="{{ url_for('post_new_song', album_id = albumi.id) }}">
+    {{ form.nimi(placeholder="Nimi") }}
+    {{ form.pituus(placeholder="Pituus") }}
+    <input type="submit" value="Lisää">
   </form>
 </div>
 {% endblock %}

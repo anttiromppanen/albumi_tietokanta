@@ -5,9 +5,11 @@ from sqlalchemy import func
 
 from application import app, db
 from application.albums.models import Albumi
-from application.albums.forms import AlbumForm, AlbumEditForm
+from application.albums.forms import AlbumForm, AlbumEditForm, AddSongForm
 
 from application.esittajat.models import Esittaja
+
+from application.kappaleet.models import Kappale
 
 from application.esittajat_albumit.models import EsittajatAlbumit
 
@@ -19,7 +21,7 @@ def albums_index():
 
     return render_template("albums/list.html", albums = EsittajatAlbumit.get_albums_by_user())
 
-@app.route("/albums/<album_id>", methods=["GET"])
+@app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
 def album_view_id(album_id):
     esittajaJaAlbumi = EsittajatAlbumit.query.filter(
@@ -30,7 +32,25 @@ def album_view_id(album_id):
     albumi = Albumi.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
     esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
 
-    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja)
+    kappaleet = Kappale.query.filter_by(album_id = albumi.id).all()
+    print("------------------------")
+    print(kappaleet)
+    print("------------------------")
+
+    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, form = AddSongForm())
+
+@app.route("/albums/<album_id>/", methods=["POST"])
+@login_required
+def post_new_song(album_id):
+    form = AddSongForm(request.form)
+    print("------------------------")
+    print(form.nimi.data)
+    print(form.pituus.data)
+    print("------------------------")
+
+    db.session().commit()
+
+    return redirect(url_for("album_view_id", album_id = album_id))
 
 @app.route("/albums/edit/<album_id>/", methods=["GET"])
 @login_required
@@ -61,7 +81,7 @@ def album_via_id(album_id):
 
     return render_template("albums/edit.html", esittaja = esittaja, albumi = albumi, form = AlbumEditForm())
 
-@app.route("/albums/<album_id>/", methods=["POST"])
+@app.route("/albums/edit/<album_id>/", methods=["POST"])
 @login_required
 def album_edit(album_id):
     album = Albumi.query.get(album_id)

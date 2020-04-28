@@ -6,7 +6,7 @@ class Kappale(Base):
   __tablename__ = "kappale"
 
   nimi = db.Column(db.String(144), nullable=False)
-  pituus = db.Column(db.Integer, nullable=False)
+  pituus = db.Column(db.Numeric(3, 2), nullable=False)
 
   album_id = db.Column(db.Integer, db.ForeignKey('albumi.id'), nullable=False)
   account_id = db.Column(db.Integer, db.ForeignKey('tili.id'), nullable=False)
