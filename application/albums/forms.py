@@ -19,7 +19,7 @@ class AlbumEditForm(FlaskForm):
         csrf = False
 
 class AddSongForm(FlaskForm):
-    nimi = StringField("Kappaleen_nimi", validators=[validators.InputRequired(), validators.Length(min=1, max=100)])
+    nimi = StringField("Kappaleen nimi", validators=[validators.InputRequired(), validators.Length(min=1, max=100)])
     pituus = DecimalField("Pituus", places=2, rounding=None, validators=[validators.InputRequired(), validators.Length(min=0.1, max=100)])
 
     class Meta:

@@ -37,20 +37,42 @@ def album_view_id(album_id):
     print(kappaleet)
     print("------------------------")
 
-    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, form = AddSongForm())
+    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, kappaleet = kappaleet, form = AddSongForm())
 
 @app.route("/albums/<album_id>/", methods=["POST"])
 @login_required
 def post_new_song(album_id):
     form = AddSongForm(request.form)
+
+    kappaleenNimi = form.nimi.data
+    kappaleenPituus = form.pituus.data
+    albumi = Albumi.query.filter_by(id = album_id).first()
+    kayttaja = current_user
+
     print("------------------------")
     print(form.nimi.data)
     print(form.pituus.data)
+    print(albumi, albumi.nimi)
+    print("Käyttäjä: ", kayttaja)
     print("------------------------")
 
+    kappale = Kappale(kappaleenNimi, kappaleenPituus, albumi.id, kayttaja.id)
+
+    db.session().add(kappale)
     db.session().commit()
 
     return redirect(url_for("album_view_id", album_id = album_id))
+
+@app.route("/songs/<song_id>/")
+@login_required
+def delete_song(song_id):
+    kappale = Kappale.query.filter_by(id = song_id).first()
+    albumi = Albumi.query.filter_by(id = kappale.album_id).first()
+
+    db.session().delete(kappale)
+    db.session().commit()
+
+    return redirect(url_for("album_view_id", album_id = albumi.id))
 
 @app.route("/albums/edit/<album_id>/", methods=["GET"])
 @login_required
