@@ -27,6 +27,7 @@ from application.esittajat_albumit import models
 from application.user_group import models
 
 from application.kappaleet import models
+from application.kappaleet import views
 
 #kirjautuminen
 from application.auth.models import User

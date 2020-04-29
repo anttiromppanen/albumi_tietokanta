@@ -10,6 +10,7 @@ from application.albums.forms import AlbumForm, AlbumEditForm, AddSongForm
 from application.esittajat.models import Esittaja
 
 from application.kappaleet.models import Kappale
+from application.kappaleet.forms import SongForm
 
 from application.esittajat_albumit.models import EsittajatAlbumit
 
@@ -37,7 +38,7 @@ def album_view_id(album_id):
     print(kappaleet)
     print("------------------------")
 
-    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, kappaleet = kappaleet, form = AddSongForm())
+    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, kappaleet = kappaleet, form = SongForm())
 
 @app.route("/albums/<album_id>/", methods=["POST"])
 @login_required
@@ -48,6 +49,12 @@ def post_new_song(album_id):
     kappaleenPituus = form.pituus.data
     albumi = Albumi.query.filter_by(id = album_id).first()
     kayttaja = current_user
+
+    if not form.validate_on_submit():
+        esittaja = Esittaja.query.filter_by(id = albumi.artist_id).first()
+        kappaleet = Kappale.query.filter_by(album_id = albumi.id).all()
+        print(form.pituus.errors)
+        return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, kappaleet = kappaleet, form = form)
 
     print("------------------------")
     print(form.nimi.data)
@@ -62,17 +69,6 @@ def post_new_song(album_id):
     db.session().commit()
 
     return redirect(url_for("album_view_id", album_id = album_id))
-
-@app.route("/songs/<song_id>/")
-@login_required
-def delete_song(song_id):
-    kappale = Kappale.query.filter_by(id = song_id).first()
-    albumi = Albumi.query.filter_by(id = kappale.album_id).first()
-
-    db.session().delete(kappale)
-    db.session().commit()
-
-    return redirect(url_for("album_view_id", album_id = albumi.id))
 
 @app.route("/albums/edit/<album_id>/", methods=["GET"])
 @login_required

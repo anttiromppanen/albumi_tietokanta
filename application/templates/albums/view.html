@@ -5,40 +5,51 @@
   data: esittaja, albumi
  -->
 <div class="container w-50 h-100 py-3 rounded form-bg full-height">
-	<h1 class="text-info d-block text-center">
-		<i class="fas fa-record-vinyl fa-2x"></i>
-  </h1>
+  <a href="{{ url_for('albums_index') }}">
+		<i class="fas fa-arrow-left fa-2x text-info shadoust"></i>
+	</a>
+  {% for error in form.pituus.errors %}
+    <h4 class="text-danger" align="center">{{ error }}</h4>
+  {% endfor %}
+  {% for error in form.nimi.errors %}
+    <h4 class="text-danger" align="center">{{ error }}</h4>
+  {% endfor %}
   <div class="row">
     <div class="col-md-6" align="center">
-      <h5 class="text-info">Artisti</h5>
-      <h6 class="text-white">{{ esittaja.nimi }}</h6> <hr>
+      <i class="fas fa-user fa-4x mb-2 text-info shadoust"></i>
+      <h5 class="text-light h5 mb-0 shadoust">Artisti</h5>
+      <h6 class="text-white h6 shadoust">{{ esittaja.nimi }}</h6> <hr>
     </div>
     <div class="col-md-6" align="center">
-      <h5 class="text-info">Albumin nimi</h5>
-      <h6 class="text-white">{{ albumi.nimi }}</h6> <hr>
+      <i class="fas fa-compact-disc fa-4x mb-2 text-info shadoust"></i>
+      <h5 class="text-light h5 mb-0 shadoust">Albumi</h5>
+      <h6 class="text-white h6 shadoust">{{ albumi.nimi }}</h6> <hr>
     </div>
   </div>
-  <h2 class="text-light" align="center">Kappaleet</h2> <hr>
-  <table class="table table-striped table-hover table-condensed text-info">
+  <h3 class="text-light pt-3 pb-3" align="center">
+    <i class="fas fa-volume-up text-info"></i> Kappaleet
+  </h3> <hr>
+  <table class="table table-hover table-condensed text-light">
     <thead class="border-0">
       <tr class="border-0">
-        <th class="border-0 pt-0">Nimi</th>
-        <th class="border-0 pt-0">Pituus</th>
+        <th class="border-0 pt-0 pr-1 pb-1 pl-1">Nimi</th>
+        <th class="border-0 pt-0 pr-1 pb-1 pl-1">Pituus</th>
+        <th class="border-0 pt-0 pr-1 pb-1 pl-1 text-right">Toiminnot</th>
       </tr>
     </thead>
-    <tbody class="text-light">
+    <tbody class="text-light every-second">
     {% for kappale in kappaleet %}
       <tr>
-        <td>
+        <td class="p-1">
           {{ kappale.nimi }}
         </td>
-        <td>
+        <td class="p-1">
           {{ kappale.pituus }} min
         </td>
-        <td align="right">
+        <td class="p-1" align="right">
           <div class="btn-group">
             <a href="#{{ kappale.id }}" data-toggle="collapse">
-              <i class="fas fa-edit text-info"></i>
+              <i class="fas fa-edit text-primary"></i>
             </a>
             <a class="ml-1" href="{{ url_for('delete_song', song_id = kappale.id) }}">
               <i class="fas fa-trash-alt text-danger"></i>
@@ -47,17 +58,19 @@
         </td>
       </tr>
       <tr id={{ kappale.id }} class="collapse">
-        <td colspan="3">
-          <form method="POST" action="">
+        <td colspan="4">
+          <form method="POST" action="{{ url_for('edit_song', song_id = kappale.id) }}">
             <div class="form-row">
               <div class="col">
-                <input type="text">
+                <label class="text-light h6 font-weight-bold shadoust" for="nimi">Uusi nimi</label>
+                {{ form.nimi(id="nimi", class="form-control form-control-sm", placeholder="esim. 'Tape Valtosen balladi'") }}
               </div>
               <div class="col">
-                <input type="text">
+                {{ form.pituus.label(class="text-light h6 font-weight-bold shadoust") }} (minuuteissa)
+                {{ form.pituus(class="form-control form-control-sm", placeholder="esim. 3.15") }}
               </div>
             </div>
-            <input type="submit" value="Muokkaa">
+            <input class="btn btn-sm btn-warning mt-2" type="submit" value="Muokkaa">
           </form>
         </td>
       </tr>
@@ -87,14 +100,14 @@
     <div class="form-row">
       <div class="col-8">
         {{ form.nimi.label(class="text-light h6 font-weight-bold") }}
-        {{ form.nimi(class="form-control form-control-sm", placeholder="esim. 'Tape Valtosen parhaat'") }}
+        {{ form.nimi(class="form-control form-control-sm", placeholder="esim. 'Tape Valtosen balladi'") }}
       </div>
-      <div class="col">
-        {{ form.pituus.label(class="text-light h6 font-weight-bold") }} (min)
+      <div class="col text-light">
+        {{ form.pituus.label(class="text-light h6 font-weight-bold") }} (minuuteissa)
         {{ form.pituus(class="form-control form-control-sm", placeholder="esim. 3.15") }}
       </div>
     </div>
-    <input class="btn btn-sm btn-success mt-2" type="submit" value="Lisää">
+    <input class="btn btn-success mt-2" type="submit" value="Lisää">
   </form>
 </div>
 {% endblock %}

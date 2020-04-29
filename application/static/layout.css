@@ -39,3 +39,7 @@ body, html {
 .full-height {
   min-height: 100vh;
 }
+
+.every-second tr:nth-child(4n-1) {
+  background: rgba(189, 189, 189, 0.1);
+}
