@@ -5,7 +5,6 @@ from flask_login import current_user
 
 from sqlalchemy.sql import text
 
-
 class EsittajatAlbumit(Base):
 
     __tablename__ = "esittajat_albumit"

@@ -7,7 +7,7 @@
 <div class="container w-50 h-100 py-3 rounded form-bg full-height">
   <a href="{{ url_for('albums_index') }}">
 		<i class="fas fa-arrow-left fa-2x text-info shadoust"></i>
-	</a>
+  </a>
   {% for error in form.pituus.errors %}
     <h4 class="text-danger" align="center">{{ error }}</h4>
   {% endfor %}
@@ -74,21 +74,15 @@
           </form>
         </td>
       </tr>
-    <!-- <p>
-      {{ kappale.nimi }} {{ kappale.pituus }}
-      <a href="#{{ kappale.id }}" data-toggle="collapse">
-        <i class="fas fa-edit text-info"></i>
-      </a>
-      <a href="{{ url_for('delete_song', song_id = kappale.id) }}">
-        <i class="fas fa-trash-alt text-danger"></i>
-      </a>
-      <form id={{ kappale.id }} class="collapse" method="POST" action="">
-        <input type="text">
-        <input type="text">
-        <input type="submit" value="Muokkaa">
-      </form>
-    </p> -->
     {% endfor %}
+    <tr>
+    <tr>
+      <td class="p-2 h6 text-light" colspan="3">
+        {% if sums_length %}
+          Yhteensä <span class="text-success">{{ sums_length[0].pituus }}</span> minuuttia musiikkia
+        {% endif %}
+      </td>
+    </tr>
     </tbody>
   </table>
   <div class="row">

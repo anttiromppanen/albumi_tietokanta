@@ -25,6 +25,21 @@ def albums_index():
 @app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
 def album_view_id(album_id):
+    if current_user.user_group == 1:
+        esittajaJaAlbumi = EsittajatAlbumit.query.filter(
+            EsittajatAlbumit.albumi_id == album_id
+            ).first() 
+
+        albumi = Albumi.query.filter_by(id = esittajaJaAlbumi.albumi_id).first()
+        esittaja = Esittaja.query.filter_by(id = esittajaJaAlbumi.esittaja_id).first()
+
+        kappaleet = Kappale.query.filter_by(album_id = albumi.id).all()
+        print("------------------------")
+        print(kappaleet)
+        print("------------------------")
+
+        return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, kappaleet = kappaleet, form = SongForm(), sums_length = Kappale.get_length_of_songs_for_album(albumi.id))
+
     esittajaJaAlbumi = EsittajatAlbumit.query.filter(
         EsittajatAlbumit.albumi_id == album_id,
         EsittajatAlbumit.lisaaja_id == current_user.id
@@ -38,7 +53,7 @@ def album_view_id(album_id):
     print(kappaleet)
     print("------------------------")
 
-    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, kappaleet = kappaleet, form = SongForm())
+    return render_template("albums/view.html", albumi = albumi, esittaja = esittaja, kappaleet = kappaleet, form = SongForm(), sums_length = Kappale.get_length_of_songs_for_album(albumi.id))
 
 @app.route("/albums/<album_id>/", methods=["POST"])
 @login_required
