@@ -1,6 +1,6 @@
 # albumi_tietokanta
 
-Käyttäjä näkee kirjautumalla tallettamansa lempialbumit, sekä voi lisätä, muokata ja poistaa albumeita. Käyttäjä kirjautuu palveluun, jolloin tälle ladataan tietokannasta kyseisen käyttäjän tallettamat albumit. Kirjautumisen jälkeen palvelun kautta voi tallettaa, poistaa, muokata ja arvostella haluamiaan albumeja. Alkuvaiheessa albumit ovat tyhjiä, eli eivät sisällä mitään kappaleita, mutta jatkossa albumit täytetään automaattisesti "dummy" kappaleilla. Kappaleiden ollessa toiminnassa lisätään sovellukseen erillinen sivu yksittäisen albumin tarkasteluun. Admin-tilillä näkee kaikkien käyttäjien lisäämät albumit.
+Käyttäjä näkee kirjautumalla tallettamansa lempialbumit, sekä voi lisätä, muokata ja poistaa albumeita. Käyttäjä kirjautuu palveluun, jolloin tälle ladataan tietokannasta kyseisen käyttäjän tallettamat albumit. Kirjautumisen jälkeen palvelun kautta voi tallettaa, poistaa, muokata ja arvostella haluamiaan albumeja. Albumien listauksesta käyttäjä pääsee yksittäisen albumin näkymään, jossa käyttäjä voi lisätä kappaleita kyseiseen albumiin. Yksittäiselle kappaleelle määritellään nimi ja pituus. Yksittäisen albumin näkymässä käyttäjä voi myös muokata, sekä poistaa kyseisen albumin kappaleita. Admin-tilillä näkee kaikkien käyttäjien lisäämät albumit.
 
 Admin-tili: Username = admin, Password = admin
 
@@ -10,4 +10,4 @@ Admin-tili: Username = admin, Password = admin
 
 [TODO](https://github.com/anttiromppanen/albumi_tietokanta/blob/master/documentation/todo.txt)
 
-![](https://i.imgur.com/SLvcrUS.png)
+![](https://i.imgur.com/9yj9aPI.png)

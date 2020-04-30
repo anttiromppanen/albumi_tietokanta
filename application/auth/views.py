@@ -39,6 +39,11 @@ def auth_register():
     if loytyykoUser:
         return render_template("auth/registerform.html", form = form, error = "Käyttäjänimi varattu, valitse uusi")
 
+    loytyykoUserjaPassword = User.query.filter(
+        User.username == form.username.data,
+        User.password == form.password.data
+        )
+
     if not form.validate_on_submit():
         return render_template("auth/registerform.html", form = form)
 
