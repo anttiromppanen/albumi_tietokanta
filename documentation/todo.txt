@@ -13,4 +13,6 @@ uuden käyttäjän rekisteröinti
 albumit
 	card-bg random levy svg valituista väreistä
 
-kappale-taulun lisäys ja kappaleiden lisäys albumeihin
+kaikki sivun osat toimimaan kunnolla mobiilissa sekä tabletissa
+
+monimutkaisempien tietokantekyselyiden optimointi parempaan muotoon

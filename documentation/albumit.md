@@ -1,4 +1,4 @@
-                          ALBUMIT
+# ALBUMIT
 
 Käyttäjänä voin lisätä, poistaa, muokata ja arvioida albumeja
 Käyttäjänä voin nähdä lisäämäni albumit
