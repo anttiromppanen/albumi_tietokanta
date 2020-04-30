@@ -8,6 +8,8 @@ Admin-tili: Username = admin, Password = admin
 
 [Linkki user storyihin](https://github.com/anttiromppanen/albumi_tietokanta/blob/master/documentation/albumit.txt)
 
+[Linkki dokumentaatioon](https://github.com/anttiromppanen/albumi_tietokanta/tree/master/documentation)
+
 [TODO](https://github.com/anttiromppanen/albumi_tietokanta/blob/master/documentation/todo.txt)
 
 ![](https://i.imgur.com/9yj9aPI.png)
