@@ -1,7 +1,20 @@
 {% extends "layout.html" %} {% block body %}
 <div class="album py-4 pl-2 pr-2 albumit-bg rounded-top">
   <div class="container">
-    <h1 class="text-center text-light mb-4">Lisäämäsi albumit</h1>
+    <h1 class="text-center text-light">Lisäämäsi albumit</h1>
+    {% if albums_and_songs %}
+      {% if current_user.user_group == 1 %}
+        <h4 class="text-center text-info mb-3">
+          Tietokantaan lisätty 
+          <span class="text-light">{{ albums_and_songs.albumien_maara }}</span> 
+          albumia ja yhteensä <span class="text-light">{{ albums_and_songs.kappaleiden_maara }}</span> kappaletta
+        </h4>
+      {% else %}
+      <h4 class="text-center text-info mb-3">
+        Olet lisännyt <span class="text-light">{{ albums_and_songs.albumien_maara }}</span> albumia ja yhteensä <span class="text-light">{{ albums_and_songs.kappaleiden_maara }}</span> kappaletta 
+      </h4>
+      {% endif %}
+    {% endif %}
     <div class="row">
       {% for album in albums %}
       <div class="col-md-4">

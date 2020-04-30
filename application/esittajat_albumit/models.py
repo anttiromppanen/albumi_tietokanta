@@ -29,7 +29,7 @@ class EsittajatAlbumit(Base):
                     " FROM Esittajat_albumit, Esittaja, Albumi WHERE"
                     " Esittajat_albumit.albumi_id = Albumi.id AND"
                     " Esittajat_albumit.esittaja_id = Esittaja.id AND"
-                    " lisaaja_id = :user").params(user=current_user.id)
+                    " Esittajat_albumit.lisaaja_id = :user").params(user=current_user.id)
 
         res = db.engine.execute(stmt)
 
@@ -83,3 +83,32 @@ class EsittajatAlbumit(Base):
                 "lisaajien_maara": row[1]})
 
         return result
+
+    @staticmethod
+    def get_num_of_albums_and_songs_by_user():
+        stmt = text("SELECT COUNT(*), (SELECT COUNT(*) FROM Kappale WHERE Kappale.account_id = :user)"
+                    "FROM Esittajat_albumit WHERE Esittajat_albumit.lisaaja_id = :user").params(user=current_user.id)
+
+        res = db.engine.execute(stmt)
+
+        result = []
+        for row in res:
+            result.append({
+                "albumien_maara": row[0],
+                "kappaleiden_maara": row[1]})
+
+        return result
+
+    @staticmethod
+    def get_num_of_albums_and_songs_for_admin():
+        stmt = text("SELECT COUNT(DISTINCT Esittajat_albumit.id), COUNT(DISTINCT Kappale.id) FROM Esittajat_albumit, Kappale")
+
+        res = db.engine.execute(stmt)
+
+        result = []
+        for row in res:
+            result.append({
+                "albumien_maara": row[0],
+                "kappaleiden_maara": row[1]})
+
+        return result        

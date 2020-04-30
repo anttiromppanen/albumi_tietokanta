@@ -18,9 +18,9 @@ from application.esittajat_albumit.models import EsittajatAlbumit
 @login_required
 def albums_index():
     if current_user.user_group == 1:
-        return render_template("albums/list.html", albums = EsittajatAlbumit.get_all_albums())
+        return render_template("albums/list.html", albums = EsittajatAlbumit.get_all_albums(), albums_and_songs = EsittajatAlbumit.get_num_of_albums_and_songs_for_admin()[0])
 
-    return render_template("albums/list.html", albums = EsittajatAlbumit.get_albums_by_user())
+    return render_template("albums/list.html", albums = EsittajatAlbumit.get_albums_by_user(), albums_and_songs = EsittajatAlbumit.get_num_of_albums_and_songs_by_user()[0])
 
 @app.route("/albums/<album_id>/", methods=["GET"])
 @login_required
@@ -201,6 +201,10 @@ def album_delete(album_id):
     album = EsittajatAlbumit.query.get(album_id)
     print(album)
 
+    kappaleet = Kappale.query.filter(Kappale.album_id == album.albumi_id).all()
+    for kappale in kappaleet:
+        db.session.delete(kappale)
+    
     db.session.delete(album)
     db.session.commit()
 

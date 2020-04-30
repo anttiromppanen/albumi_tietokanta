@@ -38,11 +38,13 @@
               ><i class="fas fa-list-ul mr-1 text-danger no-shadoust"></i>Albumit</a
             >
           </li>
+          {% if not current_user.user_group == 1 %}
           <li class="nav-item">
             <a class="nav-link text-white btn btn-lg btn-info text-weight-bold shadoust pt-1 pb-1" href="{{ url_for('albums_form') }} "
               ><i class="fas fa-plus mr-1 text-danger no-shadoust"></i>Lisää albumi</a
             >
           </li>
+          {% endif %}
 				{% endif %}
         </ul>
         <div class="form-inline mt-2 mt-md-0">
